@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'Chyntia Oesman Sans';
+  src: url('./assets/fonts/chyntia-oesman-chyntia-oesman-regular-sans-modern-400.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Bk BT';
+  src: url('./assets/fonts/Futura Bk BT Book.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Md BT';
+  src: url('./assets/fonts/Futura Bk BT Book Italic.ttf') format('truetype');
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Photograph Signature';
+  src: url('./assets/fonts/Photograph Signature.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('./assets/fonts/GreatVibes-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('./assets/fonts/GOTHICB.TTF') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --font-nama: 'Great Vibes', cursive;
+  --font-judul: 'Century Gothic', sans-serif;
+  --font-isi: 'Futura Bk BT', sans-serif;
+  --font-wedding-gift-title: 'Chyntia Oesman Sans', sans-serif;
+  --font-wedding-gift-body: 'Futura Bk BT', sans-serif;
+  --font-closing-body: 'Futura Bk BT', sans-serif;
+  --font-closing-signature: 'Photograph Signature', cursive;
+  --color-jawa-primary: #6b492b;
+  --color-jawa-text: #4d3a30;
+}
+
+/* Custom styles for Jawa Klasik Template */
+
+.font-headline {
+  font-family: 'Century Gothic', sans-serif;
+}
+
+.font-body {
+  font-family: 'Futura Bk BT', sans-serif;
+}
+
+.font-script {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-noto {
+  font-family: 'Noto Serif', serif;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
