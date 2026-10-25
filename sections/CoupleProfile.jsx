@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Illustrations
 import priaPhoto from '../assets/illustrations/PRIA-BACKGORUND-PELAMINAN.jpg';
 import wanitaPhoto from '../assets/illustrations/WANITA-BACKGORUND-PELAMINAN.jpg';
 import doveImg from '../assets/illustrations/merpati-terbang.png';
@@ -11,7 +10,6 @@ import flowerLeft from '../assets/illustrations/bunga-kiri.png';
 import flowerRight from '../assets/illustrations/bunga-kanan.png';
 import igIcon from '../assets/illustrations/instagram-button.png';
 import bgOrnamen2 from '../assets/illustrations/bg-ornamen-2.png';
-
 
 export default function CoupleProfile({ groom, bride }) {
   const fadeInUp = {
@@ -23,20 +21,9 @@ export default function CoupleProfile({ groom, bride }) {
 
   return (
     <section className="w-full min-h-screen flex items-center justify-center z-20 overflow-visible">
-      {/* 
-        The Mobile Frame Container:
-        Using the "Stacked Sections" approach with a specific background image 
-      */}
       <div className="relative w-full max-w-[500px] min-h-screen overflow-x-hidden mx-auto flex flex-col items-center">
-
-        {/* Layer 1: Global Background is applied in JawaKlasikTemplate.jsx */}
-
-        {/* Content Stack */}
         <div className="relative z-10 flex flex-col items-center w-full pb-32">
-
-          {/* 1. Quote Section (On Mountain Background) - Fluid Spacing */}
           <div className="pt-20 min-[400px]:pt-28 pb-4 px-6 min-[400px]:px-10 flex flex-col items-center w-full">
-            {/* Dove */}
             <motion.img
               animate={{
                 y: [0, -10, 0],
@@ -48,7 +35,6 @@ export default function CoupleProfile({ groom, bride }) {
               className="w-16 min-[400px]:w-20 h-auto -mt-10 min-[400px]:-mt-12 mb-1 min-[400px]:mb-8 drop-shadow-sm"
             />
 
-            {/* Quote - Fluid Font */}
             <motion.div {...fadeInUp} className="text-center mt-8 mb-4 min-[400px]:mb-8 relative">
               <p className="font-isi italic text-[#4d3a30] text-[20px] min-[375px]:text-[15px] leading-relaxed mb-4 min-[400px]:mb-6 px-2 min-[400px]:px-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
                 "Di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir"
@@ -58,17 +44,12 @@ export default function CoupleProfile({ groom, bride }) {
             </motion.div>
           </div>
 
-          {/* 2. Paper Section (bg-ornamen-1 starts here) - Fluid Width */}
           <div className="relative w-full flex flex-col items-center px-4 min-[414px]:px-18 pt-8 pb-32">
-            {/* Background Layer: Single bg-ornamen-2 (Stretched to fit content) */}
             <div
               className="absolute inset-y-0 left-0 right-0 z-0 bg-no-repeat bg-[size:100%_100%] mx-6 min-[400px]:mx-10"
               style={{ backgroundImage: `url(${bgOrnamen2})` }}
             ></div>
-            {/* Greeting and Beyond */}
             <div className="relative z-10 flex flex-col items-center w-full px-2 pt-12 min-[400px]:pt-16">
-
-              {/* Janur Arches Above Greeting - Fluid Positioning */}
               <div className="relative w-full flex justify-center mb-2">
                 <motion.img
                   initial={{ x: -50, opacity: 0 }}
@@ -92,12 +73,10 @@ export default function CoupleProfile({ groom, bride }) {
                 </div>
               </div>
 
-              {/* Introductory Text - Fluid Font */}
               <motion.p {...fadeInUp} className="mx-8 font-isi text-[#4d3a30] text-[12px] min-[375px]:text-[15px] text-center leading-relaxed mb-2 px-2 min-[400px]:px-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
                 Dengan memohon Rahmat dan Ridho Allah SWT Kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami
               </motion.p>
 
-              {/* Bride Profile - Fluid Sizing */}
               <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="flex flex-col items-center mb-2 w-full relative -mt-1">
                 <img src={flowerLeft} className="absolute left-[-32px] min-[400px]:left-[-40px] bottom-22 w-24 min-[400px]:w-36 h-auto opacity-80 pointer-events-none" alt="deco" loading="lazy" decoding="async" />
 
@@ -121,7 +100,6 @@ export default function CoupleProfile({ groom, bride }) {
                 </div>
               </motion.div>
 
-              {/* Divider */}
               <motion.div
                 initial={{ scale: 0.5, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
@@ -131,7 +109,6 @@ export default function CoupleProfile({ groom, bride }) {
                 &
               </motion.div>
 
-              {/* Groom Profile - Fluid Sizing */}
               <motion.div {...fadeInUp} transition={{ delay: 0.4 }} className="flex flex-col items-center mb-2 w-full relative -mt-1">
                 <img src={flowerRight} className="absolute right-[-32px] min-[400px]:right-[-40px] bottom-21 w-28 min-[400px]:w-36 h-auto opacity-80 pointer-events-none" alt="deco" loading="lazy" decoding="async" />
 

@@ -27,7 +27,6 @@ export default function OurStory({ stories: propStories }) {
   return (
     <section className="relative w-full flex flex-col items-center py-16 z-20 px-6 min-[400px]:px-10">
       
-      {/* Header with line */}
       <div className="relative w-full flex justify-center mb-10">
         <div className="absolute inset-y-1/2 left-0 right-0 h-[2px] bg-[#8c7457] opacity-20"></div>
         <div className="relative bg-white px-8 py-2 min-[400px]:py-3 rounded-[1rem] shadow-sm z-10">
@@ -45,12 +44,9 @@ export default function OurStory({ stories: propStories }) {
             transition={{ delay: idx * 0.2 }}
             className="flex flex-col items-center text-center w-full"
           >
-            {/* Image Frame Container */}
             <div className="relative w-full max-w-[340px] mb-6 flex items-center justify-center">
-              {/* The Frame Asset */}
-              <img src={photoFrame} alt="Frame" className="w-full h-auto relative z-10 pointer-events-none" />
+              <img src={photoFrame} alt="Frame" className="w-full h-auto relative z-10 pointer-events-none" loading="lazy" decoding="async" />
               
-              {/* Photo Area Placeholder (Behind Frame) */}
               <div className="absolute inset-0 bg-[#8c7457]/10 m-[3%] rounded-lg flex items-center justify-center overflow-hidden z-0">
                 {story.photo ? (
                   <img src={story.photo} alt={story.title} className="w-full h-full object-cover" loading="lazy" />

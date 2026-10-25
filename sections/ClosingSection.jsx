@@ -18,21 +18,16 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
 
   return (
     <section className="relative w-full flex flex-col items-center z-20 overflow-hidden">
-      {/* Background */}
       <div
         className="absolute inset-0 bg-no-repeat bg-center"
         style={{ backgroundImage: `url(${bgPenutup2})`, backgroundSize: '120% auto' }}
       />
 
-      {/* Content wrapper */}
       <div className="relative z-10 w-full flex flex-col items-center pb-0">
-
-        {/* Couple photo inside frame — frame as base, photo behind it */}
         <motion.div
           {...fadeInUp}
           className="relative flex justify-center mt-10 mb-2 w-[60%] max-w-[230px]"
         >
-          {/* Frame image as sizing reference */}
           <img
             src={framePenutup}
             alt="Frame"
@@ -41,7 +36,6 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
             decoding="async"
           />
 
-          {/* Photo behind frame, cropped to match frame shape */}
           <div
             className="absolute inset-0 z-0"
             style={{
@@ -58,7 +52,6 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
           </div>
         </motion.div>
 
-        {/* Closing text */}
         <motion.p
           {...fadeInUp}
           transition={{ delay: 0.2 }}
@@ -70,7 +63,6 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
           dan perhatian yang diberikan, kami ucapkan terima kasih.
         </motion.p>
 
-        {/* Wassalamu'alaikum signature */}
         <motion.p
           {...fadeInUp}
           transition={{ delay: 0.3 }}
@@ -80,7 +72,6 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
           Wassalamu'alaikum
         </motion.p>
 
-        {/* Gunungan ornament */}
         <motion.img
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -93,9 +84,7 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
           decoding="async"
         />
 
-        {/* Bottom area: gapura kiri + DIAMORA + gapura kanan */}
         <div className="relative w-full flex items-end justify-between mt-1 pointer-events-none">
-          {/* Gapura Kiri */}
           <motion.img
            initial={{ x: 30, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -108,7 +97,6 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
             decoding="async"
           />
 
-          {/* DIAMORA branding — centred between gapuras */}
           <motion.div
             {...fadeInUp}
             transition={{ delay: 0.5 }}
@@ -122,7 +110,6 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
             </span>
           </motion.div>
 
-          {/* Gapura Kanan */}
           <motion.img
             initial={{ x: -30, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}

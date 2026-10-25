@@ -50,18 +50,13 @@ export default function EventDetails({ events }) {
 
   return (
     <section className="relative w-full flex flex-col items-center py-4 z-20 overflow-visible">
-      
-      {/* Paper Container */}
       <div className="relative w-full flex flex-col items-center pt-16 pb-24">
-        {/* Background Layer: bg-ornamen-2 */}
         <div 
           className="absolute inset-y-0 left-0 right-0 z-0 bg-no-repeat bg-[size:100%_100%] mx-4 min-[400px]:mx-8"
           style={{ backgroundImage: `url(${bgOrnamen})` }}
         ></div>
 
-        {/* Content */}
         <div className="relative z-10 w-full flex flex-col items-center px-12 min-[400px]:px-16 gap-y-12">
-          
           {displayEvents.map((event, idx) => (
             <motion.div 
               key={idx} 
@@ -92,11 +87,8 @@ export default function EventDetails({ events }) {
               </a>
             </motion.div>
           ))}
-
         </div>
 
-        {/* Decorative Assets */}
-        {/* Sign arrow pointing right */}
         <motion.img 
           initial={{ x: -20, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -108,7 +100,6 @@ export default function EventDetails({ events }) {
           decoding="async"
         />
 
-        {/* Cat at bottom right */}
         <motion.img 
           initial={{ x: 20, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -119,7 +110,6 @@ export default function EventDetails({ events }) {
           loading="lazy"
           decoding="async"
         />
-
       </div>
     </section>
   );

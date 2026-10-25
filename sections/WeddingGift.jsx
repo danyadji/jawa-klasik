@@ -42,17 +42,13 @@ export default function WeddingGift({
 
   return (
     <section className="relative w-full flex flex-col items-center z-20 overflow-visible mt-10">
-
-      {/* Background Layer: bg-wedding-gift */}
       <div className="relative w-full flex flex-col items-center pt-16 pb-20">
         <div
           className="absolute inset-y-0 left-0 right-0 z-0 bg-no-repeat bg-[size:100%_100%] mx-0"
           style={{ backgroundImage: `url(${bgWeddingGift})` }}
         ></div>
 
-        {/* Content */}
         <div className="relative z-10 w-full flex flex-col items-center px-10 min-[400px]:px-14 text-center mt-6">
-
           <motion.h3
             {...fadeInUp}
             className="text-2xl min-[400px]:text-3xl text-[#4d3a30] mb-4 tracking-widest uppercase"
@@ -81,11 +77,9 @@ export default function WeddingGift({
             <i className={`fa-solid ${showCards ? 'fa-chevron-up' : 'fa-gift'} mr-2 text-sm`}></i>
             {showCards ? 'TUTUP HADIAH' : 'KIRIM HADIAH'}
           </motion.button>
-
         </div>
       </div>
 
-      {/* Expanded Cards Area: Meluncur tepat di bawah bingkai Wedding Gift */}
       <AnimatePresence>
         {showCards && (
           <motion.div
@@ -95,7 +89,6 @@ export default function WeddingGift({
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="w-full max-w-[420px] px-6 min-[400px]:px-8 flex flex-col gap-5 mt-2 mb-10 z-20 overflow-hidden"
           >
-            {/* Card 1: Rekening Bank / Amplop Digital */}
             <div className="bg-[#edeae1] rounded-2xl p-5 shadow-lg border border-[#ded9cd] text-center">
               <div className="flex items-center justify-center gap-2 mb-3 text-[#4d3a30]">
                 <div className="w-8 h-8 rounded-full bg-[#6b492b]/15 flex items-center justify-center text-[#6b492b]">
@@ -154,7 +147,6 @@ export default function WeddingGift({
               </div>
             </div>
 
-            {/* Card 2: Kirim Kado Fisik / Alamat Acara */}
             <div className="bg-[#edeae1] rounded-2xl p-5 shadow-lg border border-[#ded9cd] text-center">
               <div className="flex items-center justify-center gap-2 mb-3 text-[#4d3a30]">
                 <div className="w-8 h-8 rounded-full bg-[#6b492b]/15 flex items-center justify-center text-[#6b492b]">

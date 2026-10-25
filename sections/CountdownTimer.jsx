@@ -151,8 +151,6 @@ export default function CountdownTimer({
 
   return (
     <section className="relative w-full flex flex-col items-center py-16 z-20 px-6 min-[400px]:px-10">
-      
-      {/* Dress Code Box */}
       <motion.div 
         {...fadeInUp}
         className="w-full bg-[#edeae1] rounded-xl p-6 min-[400px]:p-8 flex flex-col items-center text-center shadow-md relative mb-16"
@@ -164,7 +162,6 @@ export default function CountdownTimer({
           {infoText}
         </p>
         
-        {/* Color circles overlapping the bottom edge */}
         <div className="absolute -bottom-6 min-[400px]:-bottom-7 flex gap-3 min-[400px]:gap-4">
           {colors.map((color, idx) => (
             <div 
@@ -176,7 +173,6 @@ export default function CountdownTimer({
         </div>
       </motion.div>
 
-      {/* Countdown Section */}
       <motion.div 
         {...fadeInUp} 
         transition={{ delay: 0.2 }}
@@ -204,7 +200,6 @@ export default function CountdownTimer({
           ))}
         </div>
 
-        {/* Save The Date Button */}
         <button 
           type="button"
           onClick={() => setIsModalOpen(true)}

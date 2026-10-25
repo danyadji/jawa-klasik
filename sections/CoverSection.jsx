@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Import assets from the relative path
 import bgImage from '../assets/backgrounds/bg.jpg';
 import boardName from '../assets/illustrations/board-name.png';
 import bungaTop from '../assets/illustrations/bunga11.png';
@@ -13,7 +12,6 @@ import kupu2 from '../assets/illustrations/kupu-2.png';
 import batuan from '../assets/illustrations/batuan.png';
 
 export default function CoverSection({ guestName, groomNickname, brideNickname, onOpen }) {
-  // Floating animation for butterflies
   const floatingAnimation = {
     y: [0, -10, 0],
     transition: {
@@ -25,10 +23,6 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
 
   return (
     <div className="fixed inset-0 z-[100] w-full min-h-screen flex items-center justify-center bg-[#FFFFEE] overflow-hidden">
-      {/* 
-        The Mobile Frame: 
-        This container forces the invitation to stay in a mobile-like aspect ratio on Desktop 
-      */}
       <motion.main 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -36,7 +30,6 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
         transition={{ duration: 1.2 }}
         className="relative w-full max-w-[500px] h-screen shadow-2xl overflow-hidden bg-white mx-auto flex flex-col items-center"
       >
-        {/* Layer 1: Background (Inside Frame) */}
         <div className="absolute inset-0 z-0">
           <img 
             src={bgImage} 
@@ -48,7 +41,6 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
           <div className="absolute inset-0 bg-white/10" />
         </div>
 
-        {/* Layer 2: Janur Kuning (Side Ornaments) */}
         <motion.img
           initial={{ y: -10, opacity: 0, rotate: 0 }}
           animate={{ y: 0, opacity: 1, rotate: [-2, 2, -2] }}
@@ -72,7 +64,6 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
           className="absolute right-0 top-12 h-[35%] w-auto object-contain z-[25] pointer-events-none origin-top-right"
         />
 
-        {/* Layer 3: Ornamen Atas (Bunga) */}
         <motion.div 
           initial={{ y: -20, opacity: 0, rotate: 0 }}
           animate={{ y: 0, opacity: 1, rotate: [-2, 2, -2] }}
@@ -90,7 +81,6 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
           />
         </motion.div>
 
-        {/* Layer 4 & 5: Bingkai Utama (Board) & Teks Nama */}
         <div className="relative z-30 flex flex-col items-center justify-center flex-1 w-full pt-10 px-4 min-[400px]:px-6">
           <motion.p 
             initial={{ y: 10, opacity: 0 }}
@@ -108,16 +98,13 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
             className="relative flex flex-col items-center justify-center p-2 w-full"
           >
-            {/* Main Board Container */}
             <div className="relative flex items-center justify-center w-full max-w-[400px]">
-              {/* Main Board Image */}
               <img 
                 src={boardName} 
                 alt="Name Board" 
                 className="w-11/12 max-w-[320px] h-auto drop-shadow-xl"
               />
               
-              {/* Names inside the board */}
               <div className="absolute inset-0 flex items-center justify-center pt-[10%] min-[400px]:pt-[8%]">
                 <motion.h1 
                   initial={{ scale: 0.9, opacity: 0 }}
@@ -130,7 +117,6 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
                 </motion.h1>
               </div>
  
-              {/* Kupu-2 (Pinned to the Board Anchor) */}
               <motion.img 
                 src={kupu2} 
                 alt="Butterfly" 
@@ -143,23 +129,18 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
                 className="absolute right-0 bottom-[10%] w-10 min-[400px]:w-14 h-auto z-40 rotate-[12deg] drop-shadow-md"
               />
  
-               {/* Bloom below the board - Responsive Size */}
-                            <motion.div
+              <motion.div
                 initial={{ y: 50, opacity: 0, rotate: 0 }}
                 animate={{ 
                   y: 0, 
                   opacity: 1,
-                  // Kita buat rotasi mengayun sebagai animasi terpisah agar tidak bentrok
                   rotate: [-2, 2, -2] 
                 }}
                 transition={{
-                  // Transisi untuk y dan opacity (Animasi Masuk)
                   y: { duration: 1.2, ease: "easeOut" },
                   opacity: { duration: 1.2, ease: "easeOut" },
-                  
-                  // Transisi untuk rotate (Animasi Loop Mengayun)
                   rotate: {
-                    delay: 2,           // Tunggu sampai animasi 'y' selesai
+                    delay: 2,
                     duration: 4, 
                     repeat: Infinity, 
                     ease: "easeInOut"
@@ -177,7 +158,6 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
           </motion.div>
         </div>
  
-        {/* Guest Info + Kupu-1 */}
         <div className="relative flex justify-center w-full pb-28 px-4 min-[400px]:px-6 z-50">
           <motion.section 
             initial={{ y: 40, opacity: 0 }}
@@ -205,7 +185,6 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
               </motion.button>
             </div>
  
-            {/* Kupu-1 (Pinned to Guest Card Corner) */}
             <motion.img 
               src={kupu1} 
               alt="Butterfly" 
@@ -215,19 +194,18 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
           </motion.section>
         </div>
 
-        {/* Ornamen Batuan (Pinned to Frame Bottom-Left) */}
         <motion.img 
-        initial={{ y: 50, opacity: 0 }} // Berawal dari bawah (y positif)
-        animate={{ y: 0, opacity: 1 }}   // Naik ke posisi asli
-        transition={{ 
-          duration: 1.5, 
-          delay: 2.2,
-          ease: "easeOut" 
-        }}
-        src={batuan} 
-        alt="Batuan" 
-        className="absolute bottom-12 left-0 w-[42%] max-w-[250px] h-auto z-[60] drop-shadow-2xl pointer-events-none"
-      />
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ 
+            duration: 1.5, 
+            delay: 2.2,
+            ease: "easeOut" 
+          }}
+          src={batuan} 
+          alt="Batuan" 
+          className="absolute bottom-12 left-0 w-[42%] max-w-[250px] h-auto z-[60] drop-shadow-2xl pointer-events-none"
+        />
       </motion.main>
     </div>
   );
