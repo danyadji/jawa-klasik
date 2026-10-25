@@ -42,6 +42,8 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
             src={bgImage} 
             alt="Jawa Landscape"
             className="w-full h-full object-cover"
+            fetchpriority="high"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-white/10" />
         </div>

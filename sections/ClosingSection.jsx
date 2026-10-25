@@ -37,6 +37,8 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
             src={framePenutup}
             alt="Frame"
             className="w-full h-auto relative z-10 pointer-events-none"
+            loading="lazy"
+            decoding="async"
           />
 
           {/* Photo behind frame, cropped to match frame shape */}
@@ -50,6 +52,8 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
               src={photo || couplePhoto}
               alt="Couple"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </motion.div>
@@ -85,6 +89,8 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
           src={gunungan}
           alt="Gunungan"
           className="w-24 min-[400px]:w-28 h-auto mt-6 -mb-6 drop-shadow-md"
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Bottom area: gapura kiri + DIAMORA + gapura kanan */}
@@ -96,8 +102,10 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8 }}
             src={gapuraKiri}
-            alt="Gapura Kanan"
+            alt="Gapura Kiri"
             className="w-[30%] max-w-[140px] h-auto self-end"
+            loading="lazy"
+            decoding="async"
           />
 
           {/* DIAMORA branding — centred between gapuras */}
@@ -123,6 +131,8 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
             src={gapuraKanan}
             alt="Gapura Kanan"
             className="w-[26%] max-w-[130px] h-auto self-end"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

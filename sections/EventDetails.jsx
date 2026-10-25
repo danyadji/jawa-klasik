@@ -104,6 +104,8 @@ export default function EventDetails({ events }) {
           src={arrowSign} 
           alt="Sign" 
           className="absolute left-0 top-[40%] w-24 min-[400px]:w-32 h-auto z-20 pointer-events-none drop-shadow-md"
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Cat at bottom right */}
@@ -114,6 +116,8 @@ export default function EventDetails({ events }) {
           src={catImg} 
           alt="Cat" 
           className="absolute right-0 bottom-0 w-48 min-[400px]:w-56 h-auto z-20 pointer-events-none drop-shadow-md"
+          loading="lazy"
+          decoding="async"
         />
 
       </div>

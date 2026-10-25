@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 // Illustrations
 import priaPhoto from '../assets/illustrations/PRIA-BACKGORUND-PELAMINAN.jpg';
 import wanitaPhoto from '../assets/illustrations/WANITA-BACKGORUND-PELAMINAN.jpg';
-import bgImage from '../assets/backgrounds/bg.jpg';
-import paperBg from '../assets/illustrations/bg-surat-pambuka.png';
 import doveImg from '../assets/illustrations/merpati-terbang.png';
 import janurKiri from '../assets/illustrations/janur-kuning-kiri.png';
 import janurKanan from '../assets/illustrations/janur-kuning-kanan.png';
@@ -29,7 +27,7 @@ export default function CoupleProfile({ groom, bride }) {
         The Mobile Frame Container:
         Using the "Stacked Sections" approach with a specific background image 
       */}
-      <main className="relative w-full max-w-[500px] min-h-screen overflow-x-hidden mx-auto flex flex-col items-center">
+      <div className="relative w-full max-w-[500px] min-h-screen overflow-x-hidden mx-auto flex flex-col items-center">
 
         {/* Layer 1: Global Background is applied in JawaKlasikTemplate.jsx */}
 
@@ -101,10 +99,10 @@ export default function CoupleProfile({ groom, bride }) {
 
               {/* Bride Profile - Fluid Sizing */}
               <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="flex flex-col items-center mb-2 w-full relative -mt-1">
-                <img src={flowerLeft} className="absolute left-[-32px] min-[400px]:left-[-40px] bottom-22 w-24 min-[400px]:w-36 h-auto opacity-80 pointer-events-none" alt="deco" />
+                <img src={flowerLeft} className="absolute left-[-32px] min-[400px]:left-[-40px] bottom-22 w-24 min-[400px]:w-36 h-auto opacity-80 pointer-events-none" alt="deco" loading="lazy" decoding="async" />
 
                 <div className="w-[80%] max-w-[160px] aspect-[4/5] rounded-[100%] mt-4 overflow-hidden border-4 border-white shadow-2xl relative z-10 bg-white">
-                  <img src={bride?.photo || wanitaPhoto} alt="Bride" className="w-full h-full object-cover" />
+                  <img src={bride?.photo || wanitaPhoto} alt="Bride" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
 
                 <div className="mt-2 min-[400px]:mt-4 text-center px-2 min-[400px]:px-4">
@@ -118,7 +116,7 @@ export default function CoupleProfile({ groom, bride }) {
                     Putri dari <br /> {bride?.parents || 'Bapak dan Ibu'}
                   </p>
                   <a href={bride?.ig || '#'} target={bride?.ig ? '_blank' : undefined} rel="noreferrer" className="inline-block transition-transform hover:scale-110">
-                    <img src={igIcon} alt="Instagram" className="w-7 min-[400px]:w-8 h-auto" />
+                    <img src={igIcon} alt="Instagram" className="w-7 min-[400px]:w-8 h-auto" loading="lazy" decoding="async" />
                   </a>
                 </div>
               </motion.div>
@@ -135,10 +133,10 @@ export default function CoupleProfile({ groom, bride }) {
 
               {/* Groom Profile - Fluid Sizing */}
               <motion.div {...fadeInUp} transition={{ delay: 0.4 }} className="flex flex-col items-center mb-2 w-full relative -mt-1">
-                <img src={flowerRight} className="absolute right-[-32px] min-[400px]:right-[-40px] bottom-21 w-28 min-[400px]:w-36 h-auto opacity-80 pointer-events-none" alt="deco" />
+                <img src={flowerRight} className="absolute right-[-32px] min-[400px]:right-[-40px] bottom-21 w-28 min-[400px]:w-36 h-auto opacity-80 pointer-events-none" alt="deco" loading="lazy" decoding="async" />
 
                 <div className="w-[80%] max-w-[160px] aspect-[4/5] rounded-[100%] mt-4 overflow-hidden border-4 border-white shadow-2xl relative z-10 bg-white">
-                  <img src={groom?.photo || priaPhoto} alt="Groom" className="w-full h-full object-cover" />
+                  <img src={groom?.photo || priaPhoto} alt="Groom" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
 
                 <div className="mt-2 min-[400px]:mt-4 text-center px-2 min-[400px]:px-4">
@@ -152,7 +150,7 @@ export default function CoupleProfile({ groom, bride }) {
                     Putra dari <br /> {groom?.parents || 'Bapak dan Ibu'}
                   </p>
                   <a href={groom?.ig || '#'} target={groom?.ig ? '_blank' : undefined} rel="noreferrer" className="inline-block transition-transform hover:scale-110">
-                    <img src={igIcon} alt="Instagram" className="w-7 min-[400px]:w-8 h-auto" />
+                    <img src={igIcon} alt="Instagram" className="w-7 min-[400px]:w-8 h-auto" loading="lazy" decoding="async" />
                   </a>
                 </div>
               </motion.div>
@@ -160,7 +158,7 @@ export default function CoupleProfile({ groom, bride }) {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </section>
   );
 }

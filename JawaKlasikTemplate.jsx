@@ -4,9 +4,7 @@ import { fetchUndangan } from './wp-api';
 import './jawa-klasik.css';
 
 // Layout sections
-import HeroSection from './sections/HeroSection';
 import CoverSection from './sections/CoverSection';
-import QuoteSection from './sections/QuoteSection';
 import VideoSection from './sections/VideoSection';
 import CoupleProfile from './sections/CoupleProfile';
 import EventDetails from './sections/EventDetails';
@@ -111,8 +109,6 @@ export default function JawaKlasikTemplate({ initialData = null }) {
             />
 
             <div className="animate-fade-in absolute inset-0 overflow-y-auto overflow-x-hidden">
-              <QuoteSection />
-
               <VideoSection
                 videoUrl={data.videoUrl}
                 onVideoPlay={() => setIsMusicPlaying(false)}
@@ -124,7 +120,7 @@ export default function JawaKlasikTemplate({ initialData = null }) {
               />
             
             <div className="w-full flex justify-center max-w-[480px] mx-auto relative z-10 -mt-24 mb-10 pointer-events-none">
-              <img src={pelaminanMerged} alt="Pelaminan" className="w-[70%] min-[400px]:w-[75%] h-auto drop-shadow-md" />
+              <img src={pelaminanMerged} alt="Pelaminan" className="w-[70%] min-[400px]:w-[75%] h-auto drop-shadow-md" loading="lazy" decoding="async" />
             </div>
             
             <EventDetails events={data.events || []} />
