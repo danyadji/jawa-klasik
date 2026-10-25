@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 import photoFrame from '../assets/illustrations/OUR-STORY-PHOTO-FRAME.png';
 
-export default function OurStory() {
+export default function OurStory({ stories: propStories }) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -11,7 +11,7 @@ export default function OurStory() {
     transition: { duration: 0.8, ease: "easeOut" }
   };
 
-  const stories = [
+  const defaultStories = [
     {
       title: 'Pertemuan Pertama',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet imperdiet lorem. Nulla elit lectus, vestibulum non congue eget, mattis sed metus. Sed ac lorem bibendum, lacinia erat non, ultricies diam.'
@@ -21,6 +21,8 @@ export default function OurStory() {
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet imperdiet lorem. Nulla elit lectus, vestibulum non congue eget, mattis sed metus. Sed ac lorem bibendum, lacinia erat non, ultricies diam.'
     }
   ];
+
+  const stories = propStories?.length ? propStories : defaultStories;
 
   return (
     <section className="relative w-full flex flex-col items-center py-16 z-20 px-6 min-[400px]:px-10">
@@ -50,9 +52,13 @@ export default function OurStory() {
               
               {/* Photo Area Placeholder (Behind Frame) */}
               <div className="absolute inset-0 bg-[#8c7457]/10 m-[3%] rounded-lg flex items-center justify-center overflow-hidden z-0">
-                <span className="text-[#8c7457]/70 font-bold tracking-widest uppercase text-[10px]" style={{ fontFamily: 'var(--font-judul)' }}>
-                  Area Foto
-                </span>
+                {story.photo ? (
+                  <img src={story.photo} alt={story.title} className="w-full h-full object-cover" loading="lazy" />
+                ) : (
+                  <span className="text-[#8c7457]/70 font-bold tracking-widest uppercase text-[10px]" style={{ fontFamily: 'var(--font-judul)' }}>
+                    Area Foto
+                  </span>
+                )}
               </div>
             </div>
 

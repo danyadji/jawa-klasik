@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
+import { fetchUndangan } from './wp-api';
 import './jawa-klasik.css';
 
 // Layout sections
 import HeroSection from './sections/HeroSection';
 import CoverSection from './sections/CoverSection';
 import QuoteSection from './sections/QuoteSection';
+import VideoSection from './sections/VideoSection';
 import CoupleProfile from './sections/CoupleProfile';
 import EventDetails from './sections/EventDetails';
 import CountdownTimer from './sections/CountdownTimer';
@@ -23,35 +25,57 @@ import MusicToggle from './sections/components/MusicToggle';
 import pelaminanMerged from './assets/illustrations/pelaminan- (merged).png';
 import bgImage from './assets/backgrounds/bg.jpg';
 
-export default function JawaKlasikTemplate() {
+export default function JawaKlasikTemplate({ initialData = null }) {
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const guestName = searchParams.get('to') || 'Tamu Undangan';
 
-  const [invitationData, setInvitationData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [invitationData, setInvitationData] = useState(initialData);
+  const [isLoading, setIsLoading] = useState(!initialData);
   const [isOpen, setIsOpen] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
   useEffect(() => {
-    // Simulated fetch
-    const timer = setTimeout(() => {
-      setInvitationData({
-        id: 1,
-        groom: { 
-          nickname: 'Danu', 
-          fullName: 'MUHAMAD ALDANU RAHMANSYAH',
-          parents: 'Bapak Rahman & Ibu Siti'
-        },
-        bride: { 
-          nickname: 'Fifi', 
-          fullName: 'MAGFIROH NUR PUSPITA',
-          parents: 'Bapak Puspito & Ibu Nur'
-        },
-        eventDate: '2026-08-24T00:00:00'
-      });
+    if (initialData) {
+      setInvitationData(initialData);
       setIsLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
+      return;
+    }
+    let cancelled = false;
+    setIsLoading(true);
+    // Ambil data dari WordPress (CPT undangan, by slug).
+    // Kalau WP mati / slug tidak ada, pakai data dummy biar template tetap bisa dibuka.
+    fetchUndangan(slug || 'danu-fifi')
+      .then((data) => {
+        if (!cancelled) {
+          setInvitationData(data);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setInvitationData({
+            id: 1,
+            groom: {
+              nickname: 'Danu',
+              fullName: 'MUHAMAD ALDANU RAHMANSYAH',
+              parents: 'Bapak Rahman & Ibu Siti'
+            },
+            bride: {
+              nickname: 'Fifi',
+              fullName: 'MAGFIROH NUR PUSPITA',
+              parents: 'Bapak Puspito & Ibu Nur'
+            },
+            eventDate: '2026-08-24T00:00:00',
+            events: [],
+            gallery: [],
+            stories: [],
+            bankAccounts: []
+          });
+          setIsLoading(false);
+        }
+      });
+    return () => { cancelled = true; };
   }, [slug]);
 
   if (isLoading) return <div className="flex items-center justify-center min-h-screen font-body text-jawa-charcoal">Unduhan sedang dimuat...</div>;
@@ -74,22 +98,33 @@ export default function JawaKlasikTemplate() {
             guestName={guestName}
             groomNickname={invitationData.groom.nickname}
             brideNickname={invitationData.bride.nickname}
-            onOpen={() => setIsOpen(true)}
+            onOpen={() => {
+              setIsOpen(true);
+              setIsMusicPlaying(true);
+            }}
           />
         )}
 
         {isOpen && (
-          <div className="animate-fade-in absolute inset-0 overflow-y-auto overflow-x-hidden">
-           
-            
-          
-            
-            <QuoteSection />
-
-            <CoupleProfile
-              groom={invitationData.groom}
-              bride={invitationData.bride}
+          <>
+            <MusicToggle
+              musicUrl={invitationData.musicUrl}
+              isPlaying={isMusicPlaying}
+              onToggle={() => setIsMusicPlaying((prev) => !prev)}
             />
+
+            <div className="animate-fade-in absolute inset-0 overflow-y-auto overflow-x-hidden">
+              <QuoteSection />
+
+              <VideoSection
+                videoUrl={invitationData.videoUrl}
+                onVideoPlay={() => setIsMusicPlaying(false)}
+              />
+
+              <CoupleProfile
+                groom={invitationData.groom}
+                bride={invitationData.bride}
+              />
             
             <div className="w-full flex justify-center max-w-[480px] mx-auto relative z-10 -mt-24 mb-10 pointer-events-none">
               <img src={pelaminanMerged} alt="Pelaminan" className="w-[70%] min-[400px]:w-[75%] h-auto drop-shadow-md" />
@@ -97,27 +132,45 @@ export default function JawaKlasikTemplate() {
             
             <EventDetails events={invitationData.events || []} />
             
-            <CountdownTimer targetDate={invitationData.eventDate} />
+            <CountdownTimer 
+              targetDate={invitationData.eventDate} 
+              dresscodeColors={invitationData.dresscodeColors}
+              dresscodeInfo={invitationData.dresscodeInfo}
+              groomName={invitationData.groom?.nickname || 'Danu'}
+              brideName={invitationData.bride?.nickname || 'Fifi'}
+              events={invitationData.events}
+            />
             
             <RSVPSection
               invitationId={invitationData.id}
               guestName={guestName}
             />
             
-            <OurStory />
+            <OurStory stories={invitationData.stories} />
             
-            <Gallery />
+            <Gallery photos={invitationData.gallery} videoUrl={invitationData.videoUrl} />
             
-            <WeddingGift bankAccounts={invitationData.bankAccounts || []} />
+            <WeddingGift 
+              bankAccounts={invitationData.bankAccounts || []} 
+              giftAddress={invitationData.giftAddress}
+              events={invitationData.events}
+              groomName={invitationData.groom?.nickname || 'Danu'}
+              brideName={invitationData.bride?.nickname || 'Fifi'}
+            />
 
-            <GuestBookSection />
+            <GuestBookSection
+              invitationId={invitationData.id}
+              guestName={guestName}
+            />
             
             <ClosingSection 
               groomNickname={invitationData.groom.nickname}
               brideNickname={invitationData.bride.nickname}
+              photo={invitationData.couplePhoto}
             />
           </div>
-        )}
+        </>
+      )}
       </main>
     </div>
   );

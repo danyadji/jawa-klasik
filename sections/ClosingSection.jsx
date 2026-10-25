@@ -8,7 +8,7 @@ import gapuraKanan from '../assets/illustrations/gapura-kanan.png';
 import couplePhoto from '../assets/illustrations/KEDUA-MEMPELAI-BACKGORUND-PELAMINAN.jpg';
 import bgPenutup2 from '../assets/illustrations/bg-surat-pambuka.png';
 
-export default function ClosingSection({ groomNickname, brideNickname }) {
+export default function ClosingSection({ groomNickname, brideNickname, photo }) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -47,7 +47,7 @@ export default function ClosingSection({ groomNickname, brideNickname }) {
             }}
           >
             <img
-              src={couplePhoto}
+              src={photo || couplePhoto}
               alt="Couple"
               className="w-full h-full object-cover"
             />

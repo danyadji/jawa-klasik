@@ -1,13 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export default function Gallery() {
+export default function Gallery({ photos = [], videoUrl = '' }) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.1 },
     transition: { duration: 0.8, ease: "easeOut" }
   };
+
+  const hasPhotos = photos.length > 0;
+  // 5 foto pertama untuk slider portrait, sisanya untuk landscape
+  const portraitPhotos = hasPhotos ? photos.slice(0, 5) : [];
+  const landscapePhotos = hasPhotos ? photos.slice(5, 9) : [];
 
   return (
     <section className="relative w-full flex flex-col items-center py-12 z-20 overflow-hidden">
@@ -27,7 +32,14 @@ export default function Gallery() {
         className="w-full relative mb-2"
       >
         <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory pb-2 px-6 min-[400px]:px-10" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {[1, 2, 3, 4, 5].map((item) => (
+          {hasPhotos ? portraitPhotos.map((src, idx) => (
+            <div
+              key={`portrait-${idx}`}
+              className="flex-none w-[140px] min-[400px]:w-[160px] aspect-[3/4] bg-white rounded-xl shadow-sm border border-black/5 snap-start overflow-hidden"
+            >
+              <img src={src} alt={`Galeri ${idx + 1}`} className="w-full h-full object-cover" loading="lazy" />
+            </div>
+          )) : [1, 2, 3, 4, 5].map((item) => (
             <div 
               key={`portrait-${item}`} 
               className="flex-none w-[140px] min-[400px]:w-[160px] aspect-[3/4] bg-white rounded-xl shadow-sm border border-black/5 snap-start flex items-center justify-center"
@@ -52,7 +64,14 @@ export default function Gallery() {
         className="w-full relative mb-4"
       >
         <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory pb-2 px-6 min-[400px]:px-10" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {[1, 2, 3, 4].map((item) => (
+          {landscapePhotos.length ? landscapePhotos.map((src, idx) => (
+            <div
+              key={`landscape-${idx}`}
+              className="flex-none w-[220px] min-[400px]:w-[260px] aspect-[4/3] bg-white rounded-xl shadow-sm border border-black/5 snap-start overflow-hidden"
+            >
+              <img src={src} alt={`Galeri landscape ${idx + 1}`} className="w-full h-full object-cover" loading="lazy" />
+            </div>
+          )) : [1, 2, 3, 4].map((item) => (
             <div 
               key={`landscape-${item}`} 
               className="flex-none w-[220px] min-[400px]:w-[260px] aspect-[4/3] bg-white rounded-xl shadow-sm border border-black/5 snap-start flex items-center justify-center"

@@ -13,3 +13,5 @@ dist-ssr
 *.sw?
 *.mp4
 *.MP4
+.env
+.opencode/
