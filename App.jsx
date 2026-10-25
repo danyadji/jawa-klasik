@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useParams } from 'react-router-dom';
 import { fetchUndangan } from './wp-api';
+import { DEFAULT_INVITATION } from './defaultData';
 import JawaKlasikTemplate from './JawaKlasikTemplate';
 import FloralModernTemplate from './FloralModernTemplate';
 
@@ -15,14 +16,14 @@ function TemplateDispatcher() {
     fetchUndangan(slug || 'danu-fifi')
       .then((data) => {
         if (!cancelled) {
-          setInvitation(data);
+          setInvitation(data || DEFAULT_INVITATION);
           setLoading(false);
         }
       })
       .catch((err) => {
         console.warn('Gagal memuat dari WP API, fallback ke default template', err);
         if (!cancelled) {
-          setInvitation({ template: 'jawa-klasik' });
+          setInvitation(DEFAULT_INVITATION);
           setLoading(false);
         }
       });

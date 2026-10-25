@@ -73,13 +73,23 @@ export async function deleteRsvp(rsvpId) {
 }
 
 export async function fetchUndangan(slug) {
-  const res = await fetch(
-    `${WP_API_BASE}/undangan?slug=${encodeURIComponent(slug || 'danu-fifi')}`
-  );
-  if (!res.ok) throw new Error('WP API error: ' + res.status);
-  const json = await res.json();
-  if (!json.length) throw new Error('Undangan tidak ditemukan: ' + slug);
-  return mapAcfToInvitation(json[0]);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+  try {
+    const res = await fetch(
+      `${WP_API_BASE}/undangan?slug=${encodeURIComponent(slug || 'danu-fifi')}`,
+      { signal: controller.signal }
+    );
+    clearTimeout(timeoutId);
+    if (!res.ok) throw new Error('WP API error: ' + res.status);
+    const json = await res.json();
+    if (!json.length) throw new Error('Undangan tidak ditemukan: ' + slug);
+    return await mapAcfToInvitation(json[0]);
+  } catch (err) {
+    clearTimeout(timeoutId);
+    throw err;
+  }
 }
 
 // Cache ID media -> URL biar tidak fetch berulang
@@ -87,14 +97,19 @@ const mediaCache = new Map();
 
 async function resolveMediaUrl(id) {
   if (mediaCache.has(id)) return mediaCache.get(id);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 2500);
+
   try {
-    const res = await fetch(`${WP_API_BASE}/media/${id}`);
+    const res = await fetch(`${WP_API_BASE}/media/${id}`, { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (!res.ok) return '';
     const json = await res.json();
     const url = json.source_url || '';
     mediaCache.set(id, url);
     return url;
   } catch {
+    clearTimeout(timeoutId);
     return '';
   }
 }

@@ -1,0 +1,63 @@
+// Data default cadangan ketika WordPress REST API tidak dapat dijangkau (misal saat dideploy di Vercel/Cloud).
+export const DEFAULT_INVITATION = {
+  id: 57,
+  slug: 'danu-fifi',
+  template: 'jawa-klasik',
+  groom: {
+    nickname: 'Danu',
+    fullName: 'MUHAMAD ALDANU RAHMANSYAH',
+    parents: 'Putra Pertama dari Bpk. Rahman & Ibu Siti',
+    photo: '',
+    ig: 'danurahman',
+  },
+  bride: {
+    nickname: 'Fifi',
+    fullName: 'MAGFIROH NUR PUSPITA',
+    parents: 'Putri Kedua dari Bpk. Puspito & Ibu Nur',
+    photo: '',
+    ig: 'fifipuspita',
+  },
+  couplePhoto: '',
+  eventDate: '2026-12-31T09:00:00',
+  events: [
+    {
+      title: 'Akad Nikah',
+      date: 'Sabtu, 31 Desember 2026',
+      time: 'Pukul 08.00 - 10.00 WIB',
+      location: 'Masjid Agung Al-Mubarok',
+      address: 'Jl. Malioboro No. 12, Kota Yogyakarta',
+      url: 'https://maps.google.com',
+    },
+    {
+      title: 'Resepsi Pernikahan',
+      date: 'Sabtu, 31 Desember 2026',
+      time: 'Pukul 11.00 - 14.00 WIB',
+      location: 'Gedung Joglo Heritage',
+      address: 'Jl. Kaliurang KM 9, Sleman, D.I. Yogyakarta',
+      url: 'https://maps.google.com',
+    },
+  ],
+  gallery: [],
+  videoUrl: '',
+  stories: [
+    {
+      title: 'Pertemuan Pertama',
+      description: 'Pertama kali kami bertemu di bangku kuliah pada tahun 2020. Dari sebuah pertemanan hangat, tumbuh benih cinta yang semakin tulus.',
+      photo: '',
+    },
+    {
+      title: 'Momen Lamaran',
+      description: 'Setelah perjalanan panjang bersama, pada 2025 kami memantapkan hati untuk melangkah ke jenjang yang lebih suci dengan restu kedua orang tua.',
+      photo: '',
+    },
+  ],
+  bankAccounts: [
+    { bank: 'BCA', number: '1234567890', holder: 'MUHAMAD ALDANU R' },
+    { bank: 'MANDIRI', number: '0987654321', holder: 'MAGFIROH NUR PUSPITA' },
+  ],
+  giftAddress: 'Jl. Kaliurang KM 9 No. 45, Sleman, D.I. Yogyakarta (Kediaman Mempelai Wanita)',
+  musicUrl: '',
+  quote: 'Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)',
+  dresscodeColors: ['#6B492B', '#BA7845', '#F3CAA7', '#FCF6E8'],
+  dresscodeInfo: 'Dengan hormat kami meminta anda untuk mengenakan pakaian dengan warna berikut di hari istimewa kami:',
+};
