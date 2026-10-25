@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import defaultVideo from '../assets/illustrations/undangan-fifi-final.MP4'
+
+// Fallback demo video jika belum diisi di WordPress Admin
+const DEFAULT_FALLBACK_VIDEO = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
 
 function formatTime(seconds) {
   if (isNaN(seconds) || seconds < 0) return '00:00'
@@ -37,12 +39,12 @@ export default function VideoSection({ videoUrl, onVideoPlay }) {
   const [showControls, setShowControls] = useState(true)
   const [videoSrc, setVideoSrc] = useState(() => {
     const normalized = normalizeCloudVideoUrl(videoUrl)
-    return normalized || defaultVideo
+    return normalized || DEFAULT_FALLBACK_VIDEO
   })
 
   useEffect(() => {
     const normalized = normalizeCloudVideoUrl(videoUrl)
-    setVideoSrc(normalized || defaultVideo)
+    setVideoSrc(normalized || DEFAULT_FALLBACK_VIDEO)
   }, [videoUrl])
 
   const startAutoHideTimer = useCallback(() => {
