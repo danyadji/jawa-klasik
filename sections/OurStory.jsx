@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import photoFrame from '../assets/illustrations/OUR-STORY-PHOTO-FRAME.png';
-
 export default function OurStory({ stories: propStories }) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -44,18 +42,14 @@ export default function OurStory({ stories: propStories }) {
             transition={{ delay: idx * 0.2 }}
             className="flex flex-col items-center text-center w-full"
           >
-            <div className="relative w-full max-w-[340px] mb-6 flex items-center justify-center">
-              <img src={photoFrame} alt="Frame" className="w-full h-auto relative z-10 pointer-events-none" loading="lazy" decoding="async" />
-              
-              <div className="absolute inset-0 bg-[#8c7457]/10 m-[3%] rounded-lg flex items-center justify-center overflow-hidden z-0">
-                {story.photo ? (
-                  <img src={story.photo} alt={story.title} className="w-full h-full object-cover" loading="lazy" />
-                ) : (
-                  <span className="text-[#8c7457]/70 font-bold tracking-widest uppercase text-[10px]" style={{ fontFamily: 'var(--font-judul)' }}>
-                    Area Foto
-                  </span>
-                )}
-              </div>
+            <div className="relative w-full max-w-[340px] aspect-[16/10] mb-6 rounded-2xl overflow-hidden shadow-md border-4 border-white bg-[#8c7457]/10 flex items-center justify-center">
+              {story.photo ? (
+                <img src={story.photo} alt={story.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+              ) : (
+                <span className="text-[#8c7457]/70 font-bold tracking-widest uppercase text-[10px]" style={{ fontFamily: 'var(--font-judul)' }}>
+                  Area Foto
+                </span>
+              )}
             </div>
 
             <h4 className="text-3xl min-[400px]:text-4xl text-[#4d3a30] mb-4" style={{ fontFamily: 'Photograph Signature, cursive' }}>

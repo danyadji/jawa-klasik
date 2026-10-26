@@ -97,17 +97,18 @@ export async function fetchUndangan(slug) {
 const mediaCache = new Map();
 
 async function resolveMediaUrl(id) {
+  if (!id) return '';
   if (mediaCache.has(id)) return mediaCache.get(id);
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 2500);
+  const timeoutId = setTimeout(() => controller.abort(), 6000);
 
   try {
     const res = await fetch(`${WP_API_BASE}/media/${id}`, { signal: controller.signal });
     clearTimeout(timeoutId);
     if (!res.ok) return '';
     const json = await res.json();
-    const url = json.source_url || '';
-    mediaCache.set(id, url);
+    const url = json.source_url || json.guid?.rendered || '';
+    if (url) mediaCache.set(id, url);
     return url;
   } catch {
     clearTimeout(timeoutId);
@@ -159,6 +160,7 @@ function parseDresscodeColors(val) {
 async function mapAcfToInvitation(post) {
   const a = post.acf || {};
 
+  // Prioritaskan URL gambar langsung dari WP backend jika sudah di-resolve
   const [
     groomPhoto,
     bridePhoto,
@@ -167,9 +169,9 @@ async function mapAcfToInvitation(post) {
     story1Photo,
     story2Photo,
   ] = await Promise.all([
-    resolveImage(a.mempelai_pria_foto),
-    resolveImage(a.mempelai_wanita_foto),
-    resolveImage(a.couple_foto),
+    post.groom_photo_url || resolveImage(a.mempelai_pria_foto),
+    post.bride_photo_url || resolveImage(a.mempelai_wanita_foto),
+    post.couple_photo_url || resolveImage(a.couple_foto),
     resolveImage(a.galeri_1),
     resolveImage(a.galeri_2),
     resolveImage(a.galeri_3),
@@ -198,12 +200,26 @@ async function mapAcfToInvitation(post) {
     },
   ].filter((e) => e.title || e.date || e.location);
 
-  const gallery = [galeri1, galeri2, galeri3, galeri4, galeri5].filter(Boolean);
+  // Gallery: prioritaskan gallery_urls dari backend (array URL bersih)
+  const gallery = (Array.isArray(post.gallery_urls) && post.gallery_urls.length > 0)
+    ? post.gallery_urls.filter(Boolean)
+    : [galeri1, galeri2, galeri3, galeri4, galeri5].filter(Boolean);
 
-  const stories = [
-    { title: a.story_1_title, description: a.story_1_desc, photo: story1Photo },
-    { title: a.story_2_title, description: a.story_2_desc, photo: story2Photo },
-  ].filter((s) => s.title || s.description || s.photo);
+  // Stories: dukung multiple stories (> 2) secara dinamis
+  let stories = [];
+  if (Array.isArray(post.stories) && post.stories.length > 0) {
+    stories = post.stories.map(s => ({
+      title: s.title || '',
+      description: s.description || s.desc || '',
+      photo: s.photo || s.photo_url || '',
+      date: s.date || '',
+    })).filter(s => s.title || s.description || s.photo);
+  } else {
+    stories = [
+      { title: a.story_1_title, description: a.story_1_desc, photo: story1Photo },
+      { title: a.story_2_title, description: a.story_2_desc, photo: story2Photo },
+    ].filter((s) => s.title || s.description || s.photo);
+  }
 
   const bankAccounts = [
     { bank: a.bank_1_name, number: a.bank_1_number, holder: a.bank_1_holder },
@@ -237,11 +253,11 @@ async function mapAcfToInvitation(post) {
     eventDate: a.event_date || null,
     events,
     gallery,
-    videoUrl: a.video_url || post.video_url || post.meta?.video_url || '',
+    videoUrl: post.video_url || a.video_url || post.meta?.video_url || '',
     stories,
     bankAccounts,
     giftAddress: a.gift_address || '',
-    musicUrl: a.music_url || post.music_url || post.meta?.music_url || '',
+    musicUrl: post.music_url || a.music_url || post.meta?.music_url || '',
     quote: a.quote_text || '',
     dresscodeColors,
     dresscodeInfo,

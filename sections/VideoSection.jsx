@@ -11,19 +11,24 @@ function formatTime(seconds) {
 }
 
 function normalizeCloudVideoUrl(url) {
-  if (!url) return { isDrive: false, url: '' }
+  if (!url) return { isDrive: false, isYoutube: false, url: '' }
   const trimmed = url.trim()
+
+  const ytMatch = trimmed.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([a-zA-Z0-9_-]{11})/)
+  if (ytMatch && ytMatch[1]) {
+    return { isDrive: false, isYoutube: true, ytId: ytMatch[1], url: trimmed }
+  }
 
   const gdriveMatch = trimmed.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || (trimmed.includes('drive.google.com') && trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/))
   if (gdriveMatch && gdriveMatch[1]) {
-    return { isDrive: true, driveId: gdriveMatch[1] }
+    return { isDrive: true, isYoutube: false, driveId: gdriveMatch[1] }
   }
 
   if (trimmed.includes('dropbox.com')) {
-    return { isDrive: false, url: trimmed.replace('dl=0', 'raw=1').replace('?dl=1', '?raw=1') }
+    return { isDrive: false, isYoutube: false, url: trimmed.replace('dl=0', 'raw=1').replace('?dl=1', '?raw=1') }
   }
 
-  return { isDrive: false, url: trimmed }
+  return { isDrive: false, isYoutube: false, url: trimmed }
 }
 
 export default function VideoSection({ videoUrl, onVideoPlay }) {
@@ -103,18 +108,30 @@ export default function VideoSection({ videoUrl, onVideoPlay }) {
 
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0
   const isDrive = videoState.isDrive
+  const isYoutube = videoState.isYoutube
   const driveEmbedUrl = isDrive
     ? `https://drive.google.com/file/d/${videoState.driveId}/preview`
     : null
-  const videoSrc = !isDrive ? (videoState.url || DEFAULT_FALLBACK_VIDEO) : null
+  const youtubeEmbedUrl = isYoutube
+    ? `https://www.youtube-nocookie.com/embed/${videoState.ytId}?rel=0&modestbranding=1`
+    : null
+  const videoSrc = (!isDrive && !isYoutube) ? (videoState.url || DEFAULT_FALLBACK_VIDEO) : null
 
   return (
     <section className="relative w-full h-[100dvh] min-h-[100dvh] flex flex-col items-center justify-center z-20 overflow-hidden bg-black select-none">
       <div
         className="relative w-full h-full overflow-hidden cursor-pointer"
-        onClick={!isDrive ? handleVideoTap : undefined}
+        onClick={(!isDrive && !isYoutube) ? handleVideoTap : undefined}
       >
-        {isDrive ? (
+        {isYoutube ? (
+          <iframe
+            src={youtubeEmbedUrl}
+            className="w-full h-full border-0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Video undangan YouTube"
+          />
+        ) : isDrive ? (
           <iframe
             src={driveEmbedUrl}
             className="w-full h-full border-0"
@@ -140,7 +157,7 @@ export default function VideoSection({ videoUrl, onVideoPlay }) {
           />
         )}
 
-        {!isDrive && (
+        {!isDrive && !isYoutube && (
           <>
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/55 via-transparent to-black/20" />
 
