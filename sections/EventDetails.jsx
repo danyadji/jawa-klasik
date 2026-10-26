@@ -90,10 +90,10 @@ export default function EventDetails({ events }) {
                 </h3>
                 
                 <div className="font-isi text-[#4d3a30] text-[11px] min-[375px]:text-[13px] leading-relaxed mb-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
-                  <p className="font-bold">{event.date}</p>
-                  <p>{event.time}</p>
-                  <p className="font-bold mt-2">{event.location}</p>
-                  <p className="opacity-80 leading-snug max-w-[200px] mx-auto">{event.address}</p>
+                  {event.date ? <p className="font-bold">{event.date}</p> : null}
+                  {event.time ? <p>{event.time}</p> : null}
+                  {event.location ? <p className="font-bold mt-2">{event.location}</p> : null}
+                  {event.address ? <p className="opacity-80 leading-snug max-w-[200px] mx-auto">{event.address}</p> : null}
                 </div>
 
                 <a 

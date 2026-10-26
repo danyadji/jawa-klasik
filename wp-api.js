@@ -74,17 +74,22 @@ export async function deleteRsvp(rsvpId) {
 
 export async function fetchUndangan(slug) {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 3000);
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
 
   try {
-    const res = await fetch(
-      `${WP_API_BASE}/undangan?slug=${encodeURIComponent(slug || 'danu-fifi')}`,
-      { signal: controller.signal }
-    );
+    const url = slug
+      ? `${WP_API_BASE}/undangan?slug=${encodeURIComponent(slug)}&_t=${Date.now()}`
+      : `${WP_API_BASE}/undangan?per_page=1&orderby=modified&order=desc&_t=${Date.now()}`;
+
+    const res = await fetch(url, {
+      signal: controller.signal,
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
+    });
     clearTimeout(timeoutId);
     if (!res.ok) throw new Error('WP API error: ' + res.status);
     const json = await res.json();
-    if (!json.length) throw new Error('Undangan tidak ditemukan: ' + slug);
+    if (!json.length) throw new Error('Undangan tidak ditemukan' + (slug ? ': ' + slug : ''));
     return await mapAcfToInvitation(json[0]);
   } catch (err) {
     clearTimeout(timeoutId);

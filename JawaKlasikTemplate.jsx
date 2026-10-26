@@ -117,6 +117,7 @@ export default function JawaKlasikTemplate({ initialData = null }) {
               <CoupleProfile
                 groom={data.groom}
                 bride={data.bride}
+                quote={data.quote}
               />
             
             <div className="w-full flex justify-center max-w-[480px] mx-auto relative z-10 -mt-24 mb-10 pointer-events-none">

@@ -11,7 +11,7 @@ import flowerRight from '../assets/illustrations/bunga-kanan.png';
 import igIcon from '../assets/illustrations/instagram-button.png';
 import bgOrnamen2 from '../assets/illustrations/bg-ornamen-2.png';
 
-export default function CoupleProfile({ groom, bride }) {
+export default function CoupleProfile({ groom, bride, quote }) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -36,10 +36,16 @@ export default function CoupleProfile({ groom, bride }) {
             />
 
             <motion.div {...fadeInUp} className="text-center mt-8 mb-4 min-[400px]:mb-8 relative">
-              <p className="font-isi italic text-[#4d3a30] text-[20px] min-[375px]:text-[15px] leading-relaxed mb-4 min-[400px]:mb-6 px-2 min-[400px]:px-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
-                "Di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir"
-                <br />
-                <span className="font-bold text-[9px] min-[375px]:text-[10px] mt-4 block tracking-widest uppercase opacity-80">(QS. Ar-Rum: 21)</span>
+              <p className="font-isi italic text-[#4d3a30] text-[13px] min-[375px]:text-[15px] leading-relaxed mb-4 min-[400px]:mb-6 px-2 min-[400px]:px-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+                {quote ? (
+                  quote
+                ) : (
+                  <>
+                    "Di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir"
+                    <br />
+                    <span className="font-bold text-[9px] min-[375px]:text-[10px] mt-4 block tracking-widest uppercase opacity-80">(QS. Ar-Rum: 21)</span>
+                  </>
+                )}
               </p>
             </motion.div>
           </div>
