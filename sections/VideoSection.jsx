@@ -97,8 +97,8 @@ export default function VideoSection({ videoUrl, onVideoPlay }) {
   }
 
   function handleVideoError() {
-    if (videoSrc !== defaultVideo) {
-      setVideoSrc(defaultVideo)
+    if (videoSrc !== DEFAULT_FALLBACK_VIDEO) {
+      setVideoSrc(DEFAULT_FALLBACK_VIDEO)
     }
   }
 
