@@ -11,6 +11,25 @@ const MapPinIcon = () => (
   </svg>
 );
 
+function getGoogleMapsUrl(event) {
+  if (event?.url && typeof event.url === 'string') {
+    const trimmed = event.url.trim();
+    if (trimmed && trimmed !== '#') {
+      if (/^(https?:)?\/\//i.test(trimmed)) {
+        return trimmed.startsWith('//') ? `https:${trimmed}` : trimmed;
+      }
+      return `https://${trimmed}`;
+    }
+  }
+
+  const query = [event?.location, event?.address].filter(Boolean).join(', ').trim();
+  if (query) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  }
+
+  return 'https://maps.google.com';
+}
+
 export default function EventDetails({ events }) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -57,36 +76,39 @@ export default function EventDetails({ events }) {
         ></div>
 
         <div className="relative z-10 w-full flex flex-col items-center px-12 min-[400px]:px-16 gap-y-12">
-          {displayEvents.map((event, idx) => (
-            <motion.div 
-              key={idx} 
-              {...fadeInUp} 
-              transition={{ delay: idx * 0.2 }}
-              className="flex flex-col items-center text-center w-full"
-            >
-              <h3 className="text-4xl min-[400px]:text-5xl text-[#877d5e] mb-4" style={{ fontFamily: 'Great Vibes, cursive' }}>
-                {event.title}
-              </h3>
-              
-              <div className="font-isi text-[#4d3a30] text-[11px] min-[375px]:text-[13px] leading-relaxed mb-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
-                <p className="font-bold">{event.date}</p>
-                <p>{event.time}</p>
-                <p className="font-bold mt-2">{event.location}</p>
-                <p className="opacity-80 leading-snug max-w-[200px] mx-auto">{event.address}</p>
-              </div>
-
-              <a 
-                href={event.url}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-center bg-[#6b492b] text-white py-2 px-6 rounded-md font-bold text-[10px] min-[375px]:text-[11px] tracking-wider hover:bg-[#4d3a30] transition-colors"
-                style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+          {displayEvents.map((event, idx) => {
+            const mapUrl = getGoogleMapsUrl(event);
+            return (
+              <motion.div 
+                key={idx} 
+                {...fadeInUp} 
+                transition={{ delay: idx * 0.2 }}
+                className="flex flex-col items-center text-center w-full"
               >
-                <MapPinIcon />
-                LIHAT LOKASI
-              </a>
-            </motion.div>
-          ))}
+                <h3 className="text-4xl min-[400px]:text-5xl text-[#877d5e] mb-4" style={{ fontFamily: 'Great Vibes, cursive' }}>
+                  {event.title}
+                </h3>
+                
+                <div className="font-isi text-[#4d3a30] text-[11px] min-[375px]:text-[13px] leading-relaxed mb-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+                  <p className="font-bold">{event.date}</p>
+                  <p>{event.time}</p>
+                  <p className="font-bold mt-2">{event.location}</p>
+                  <p className="opacity-80 leading-snug max-w-[200px] mx-auto">{event.address}</p>
+                </div>
+
+                <a 
+                  href={mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center bg-[#6b492b] text-white py-2 px-6 rounded-md font-bold text-[10px] min-[375px]:text-[11px] tracking-wider hover:bg-[#4d3a30] active:scale-95 transition-all shadow-sm hover:shadow-md cursor-pointer"
+                  style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+                >
+                  <MapPinIcon />
+                  LIHAT LOKASI
+                </a>
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.img 
