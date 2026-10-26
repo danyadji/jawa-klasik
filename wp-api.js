@@ -81,11 +81,7 @@ export async function fetchUndangan(slug) {
       ? `${WP_API_BASE}/undangan?slug=${encodeURIComponent(slug)}&_t=${Date.now()}`
       : `${WP_API_BASE}/undangan?per_page=1&orderby=modified&order=desc&_t=${Date.now()}`;
 
-    const res = await fetch(url, {
-      signal: controller.signal,
-      cache: 'no-store',
-      headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
-    });
+    const res = await fetch(url, { signal: controller.signal });
     clearTimeout(timeoutId);
     if (!res.ok) throw new Error('WP API error: ' + res.status);
     const json = await res.json();
