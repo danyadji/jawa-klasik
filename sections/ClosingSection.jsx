@@ -1,7 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-import framePenutup from '../assets/illustrations/frame-penutup.png';
 import gunungan from '../assets/illustrations/gunungan.png';
 import gapuraKiri from '../assets/illustrations/gapura-kiri.png';
 import gapuraKanan from '../assets/illustrations/gapura-kanan.png';
@@ -26,29 +24,23 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
       <div className="relative z-10 w-full flex flex-col items-center pb-0">
         <motion.div
           {...fadeInUp}
-          className="relative flex justify-center mt-10 mb-2 w-[60%] max-w-[230px]"
+          className="relative flex justify-center mt-10 mb-2 w-[55%] max-w-[210px] aspect-[3/4]"
         >
-          <img
-            src={framePenutup}
-            alt="Frame"
-            className="w-full h-auto relative z-10 pointer-events-none"
-            loading="lazy"
-            decoding="async"
-          />
-
           <div
-            className="absolute inset-0 z-0"
+            className="w-full h-full p-2 rounded-[50%/50%] shadow-xl flex items-center justify-center bg-white border border-[#8c7457]/20"
             style={{
-              clipPath: 'ellipse(46% 48% at 50% 48%)',
+              boxShadow: '0 10px 28px rgba(77, 58, 48, 0.22)',
             }}
           >
-            <img
-              src={photo || couplePhoto}
-              alt="Couple"
-              className="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
+            <div className="w-full h-full rounded-[50%/50%] overflow-hidden border-[3px] border-[#9c7b56] relative bg-[#8c7457]/10">
+              <img
+                src={photo || couplePhoto}
+                alt="Foto Berdua"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
         </motion.div>
 
