@@ -51,7 +51,7 @@ export default function WeddingGift({
         <div className="relative z-10 w-full flex flex-col items-center px-10 min-[400px]:px-14 text-center mt-6">
           <motion.h3
             {...fadeInUp}
-            className="text-2xl min-[400px]:text-3xl text-[#4d3a30] mb-4 tracking-widest uppercase"
+            className="text-2xl font-bold min-[400px]:text-3xl text-[#4d3a30] mb-4 tracking-widest uppercase"
             style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}
           >
             Wedding Gift
@@ -61,7 +61,7 @@ export default function WeddingGift({
             {...fadeInUp}
             transition={{ delay: 0.2 }}
             className="text-[#4d3a30] text-[11px] min-[375px]:text-[13px] font-medium leading-relaxed mb-8 max-w-[90%] mx-auto"
-            style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+            style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
           >
             Restu dan langkah Anda yang hadir adalah hadiah paling indah. Bila ingin menitipkan tanda kasih, kami dengan penuh syukur menerima melalui informasi berikut:
           </motion.p>
@@ -72,7 +72,7 @@ export default function WeddingGift({
             type="button"
             onClick={() => setShowCards(!showCards)}
             className="flex items-center justify-center bg-[#6b492b] text-white py-3 px-8 rounded-lg font-medium text-[10px] min-[375px]:text-[12px] tracking-widest hover:bg-[#4d3a30] active:scale-95 transition-all shadow-lg cursor-pointer"
-            style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+            style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
           >
             <i className={`fa-solid ${showCards ? 'fa-chevron-up' : 'fa-gift'} mr-2 text-sm`}></i>
             {showCards ? 'TUTUP HADIAH' : 'KIRIM HADIAH'}
@@ -102,7 +102,7 @@ export default function WeddingGift({
                 </h4>
               </div>
               
-              <p className="text-[11px] text-[#6b492b] mb-4 font-medium italic" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+              <p className="text-[11px] text-[#6b492b] mb-4 font-medium not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif' }}>
                 Silakan transfer tanda kasih ke nomor rekening berikut:
               </p>
 
@@ -160,7 +160,7 @@ export default function WeddingGift({
                 </h4>
               </div>
 
-              <p className="text-[11px] text-[#6b492b] mb-4 font-medium italic" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+              <p className="text-[11px] text-[#6b492b] mb-4 font-medium not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif' }}>
                 Kado fisik dapat dikirimkan ke alamat berikut:
               </p>
 

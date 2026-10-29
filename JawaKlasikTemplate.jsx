@@ -79,15 +79,20 @@ export default function JawaKlasikTemplate({ initialData = null }) {
   return (
     <div className="w-full overflow-x-hidden relative"> 
       <main 
-        className="max-w-[500px] mx-auto min-h-[100dvh] relative overflow-x-hidden bg-white shadow-2xl"
-        style={{ 
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          backgroundRepeat: 'no-repeat'
-        }}
+        className="max-w-[500px] mx-auto min-h-[100dvh] h-[100dvh] relative overflow-hidden bg-white shadow-2xl"
       >
+        {/* Background Fixed untuk semua section (terkunci di frame 500px, tidak kepotong) */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <img
+            src={bgImage}
+            alt="Background"
+            className="w-full h-full object-cover object-center"
+            fetchpriority="high"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-white/10" />
+        </div>
+
         {!isOpen && (
           <CoverSection
             guestName={guestName}
@@ -108,7 +113,7 @@ export default function JawaKlasikTemplate({ initialData = null }) {
               onToggle={() => setIsMusicPlaying((prev) => !prev)}
             />
 
-            <div className="animate-fade-in absolute inset-0 overflow-y-auto overflow-x-hidden">
+            <div className="animate-fade-in absolute inset-0 overflow-y-auto overflow-x-hidden z-10">
               <VideoSection
                 videoUrl={data.videoUrl}
                 onVideoPlay={() => setIsMusicPlaying(false)}

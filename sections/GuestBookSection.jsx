@@ -95,20 +95,11 @@ export default function GuestBookSection({ invitationId, guestName }) {
         {/* Title */}
         <motion.h3
           {...fadeInUp}
-          className="text-xl min-[400px]:text-2xl text-[#6b492b] mb-2 tracking-widest uppercase text-center"
+          className="text-xl min-[400px]:text-2xl font-bold text-[#6b492b] mb-2 tracking-widest uppercase text-center"
           style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}
         >
-          Ucapan & Do'a
+          BEST WISHES
         </motion.h3>
-
-        <motion.p
-          {...fadeInUp}
-          transition={{ delay: 0.1 }}
-          className="text-[#4d3a30] text-[11px] min-[400px]:text-[12px] text-center mb-6 leading-relaxed"
-          style={{ fontFamily: 'Futura Md BT, sans-serif' }}
-        >
-          Berikan doa restu dan ucapan hangat Anda untuk kedua mempelai.
-        </motion.p>
 
         {/* Form */}
         <motion.form
@@ -132,7 +123,7 @@ export default function GuestBookSection({ invitationId, guestName }) {
           <div className="flex flex-col gap-1 text-left">
             <label
               className="text-[#4d3a30] text-[11px] min-[400px]:text-[12px] font-semibold"
-              style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+              style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
             >
               Nama Anda <span className="text-red-500">*</span>
             </label>
@@ -143,14 +134,14 @@ export default function GuestBookSection({ invitationId, guestName }) {
               placeholder="Contoh: Danu & Partner"
               required
               className="w-full bg-white rounded-lg px-4 py-2.5 text-[#4d3a30] text-[12px] outline-none focus:ring-2 focus:ring-[#6b492b] shadow-sm placeholder-gray-400"
-              style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+              style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
             />
           </div>
 
           <div className="flex flex-col gap-1 text-left">
             <label
               className="text-[#4d3a30] text-[11px] min-[400px]:text-[12px] font-semibold"
-              style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+              style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
             >
               Ucapan dan Do'a <span className="text-red-500">*</span>
             </label>
@@ -161,7 +152,7 @@ export default function GuestBookSection({ invitationId, guestName }) {
               placeholder="Tulis ucapan dan doa restu untuk kedua mempelai..."
               required
               className="w-full bg-white rounded-lg px-4 py-2.5 text-[#4d3a30] text-[12px] outline-none focus:ring-2 focus:ring-[#6b492b] shadow-sm resize-none placeholder-gray-400"
-              style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+              style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
             />
           </div>
 
@@ -171,7 +162,7 @@ export default function GuestBookSection({ invitationId, guestName }) {
             type="submit"
             disabled={isSubmitting}
             className="w-48 mx-auto bg-[#6b492b] hover:bg-[#4d3a30] text-white tracking-[0.25em] uppercase py-2.5 rounded-lg text-[11px] font-semibold transition-colors mt-1 shadow-md disabled:opacity-60 cursor-pointer"
-            style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+            style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
           >
             {isSubmitting ? 'Mengirim...' : 'Kirim Ucapan'}
           </motion.button>
@@ -187,15 +178,6 @@ export default function GuestBookSection({ invitationId, guestName }) {
         {/* Submitted entries list dengan internal scroll & counter badge */}
         {!isLoading && entries.length > 0 && (
           <div className="w-full mt-6 flex flex-col">
-            {/* Counter badge */}
-            <div className="flex items-center justify-between mb-3 px-1">
-              <span className="text-[12px] font-semibold text-[#6b492b] tracking-wider uppercase" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
-                💬 {entries.length} Ucapan & Do'a
-              </span>
-              <span className="text-[10px] text-stone-500 font-sans">
-                Gulir ke bawah ↓
-              </span>
-            </div>
 
             {/* Scrollable list container */}
             <div className="w-full flex flex-col gap-2.5 max-h-[360px] overflow-y-auto pr-1.5 diamora-guestbook-scroll">
@@ -210,19 +192,19 @@ export default function GuestBookSection({ invitationId, guestName }) {
                   <div className="flex items-center justify-between gap-2 mb-1">
                     <p
                       className="text-[#4D3A30] font-bold text-[12px] min-[400px]:text-[13px]"
-                      style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}
+                      style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
                     >
                       {entry.nama || entry.name}
                     </p>
                     {entry.created_at && (
-                      <span className="text-[10px] text-gray-400 font-sans">
+                      <span className="text-[12px] text-gray-400 font-sans">
                         {formatDate(entry.created_at)}
                       </span>
                     )}
                   </div>
                   <p
-                    className="text-[#4D3A30] text-[12px] leading-relaxed whitespace-pre-line"
-                    style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+                    className="text-[#4D3A30] leading-relaxed whitespace-pre-line not-italic"
+                    style={{ fontFamily: 'Futura Bk BT, sans-serif', fontSize: '10pt', fontWeight: 400, fontStyle: 'normal' }}
                   >
                     {entry.pesan || entry.message}
                   </p>

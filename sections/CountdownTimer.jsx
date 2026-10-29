@@ -155,10 +155,10 @@ export default function CountdownTimer({
         {...fadeInUp}
         className="w-full bg-[#edeae1] rounded-xl p-6 min-[400px]:p-8 flex flex-col items-center text-center shadow-md relative mb-16"
       >
-        <h3 className="text-xl min-[400px]:text-2xl text-[#4d3a30] mb-3 tracking-widest uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
+        <h3 className="text-xl font-bold min-[400px]:text-2xl text-[#4d3a30] mb-3 tracking-widest uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
           Dress Code
         </h3>
-        <p className="font-isi text-[#4d3a30] text-[11px] min-[375px]:text-[12px] leading-relaxed mb-6 italic" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+        <p className="font-isi not-italic text-[#4d3a30] text-[12px] min-[375px]:text-[13px] min-[400px]:text-[14px] leading-relaxed mb-6" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
           {infoText}
         </p>
         
@@ -166,7 +166,7 @@ export default function CountdownTimer({
           {colors.map((color, idx) => (
             <div 
               key={idx}
-              className="w-12 h-12 min-[400px]:w-14 min-[400px]:h-14 rounded-full border-4 border-[#edeae1] shadow-sm"
+              className="w-12 h-12 min-[400px]:w-14 min-[400px]:h-14 rounded-full shadow-sm"
               style={{ backgroundColor: color }}
             />
           ))}
@@ -178,7 +178,7 @@ export default function CountdownTimer({
         transition={{ delay: 0.2 }}
         className="flex flex-col items-center w-full mt-6"
       >
-        <h3 className="text-sm min-[400px]:text-base text-[#4d3a30] mb-6 tracking-widest uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
+        <h3 className="text-sm font-bold min-[400px]:text-base text-[#4d3a30] mb-6 tracking-widest uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
           Counting Down To The Day
         </h3>
 
@@ -193,7 +193,7 @@ export default function CountdownTimer({
               <span className="text-3xl min-[400px]:text-4xl text-[#4d3a30] mb-1 leading-none" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
                 {item.value.toString().padStart(2, '0')}
               </span>
-              <span className="text-[10px] min-[400px]:text-xs text-[#4d3a30] font-bold tracking-wider capitalize" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+              <span className="text-[10px] min-[400px]:text-xs text-[#4d3a30] font-bold tracking-wider capitalize not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
                 {item.label}
               </span>
             </div>

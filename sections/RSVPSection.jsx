@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { submitRsvp } from '../wp-api';
 
 import kupu2 from '../assets/illustrations/kupu-2.png';
-import catMerged from '../assets/illustrations/cat-merged.png';
+import catMerged from '../assets/illustrations/kucing-rsvp.png';
 
 export default function RSVPSection({ invitationId, guestName }) {
   const fadeInUp = {
@@ -66,36 +66,36 @@ export default function RSVPSection({ invitationId, guestName }) {
           className="absolute -top-6 -left-6 w-12 min-[400px]:w-14 h-auto drop-shadow-sm pointer-events-none"
         />
 
-        <h3 className="text-2xl min-[400px]:text-3xl text-white text-center mb-4 tracking-widest" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
+        <h3 className="text-2xl font-bold min-[400px]:text-3xl text-white text-center mb-4 tracking-widest not-italic" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
           RSVP
         </h3>
         
-        <p className="text-white text-center text-[10px] min-[375px]:text-[12px] leading-relaxed mb-6" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+        <p className="text-white text-center text-[10px] min-[375px]:text-[14px] leading-relaxed mb-6 not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
           Di hari yang penuh makna ini, kehadiran serta doa restu Bapak/Ibu/Saudara/i akan menjadi bagian indah dari perjalanan baru kami. Terima kasih atas segala doa dan kasih yang diberikan.
         </p>
 
         {isSubmitted ? (
-          <div className="bg-white/10 border border-white/20 rounded-xl p-6 text-center text-white backdrop-blur-sm">
+          <div className="bg-white/10 border border-white/20 rounded-xl p-6 text-center text-white backdrop-blur-sm not-italic">
             <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-2xl font-bold">
               ✓
             </div>
-            <h4 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
+            <h4 className="text-lg font-semibold mb-2 not-italic" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
               Terima Kasih!
             </h4>
-            <p className="text-xs text-white/90 leading-relaxed mb-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+            <p className="text-xs text-white/90 leading-relaxed mb-4 not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
               Konfirmasi kehadiran atas nama <strong>{name}</strong> telah berhasil kami terima.
             </p>
             <button
               type="button"
               onClick={() => setIsSubmitted(false)}
-              className="text-[11px] text-white/70 underline hover:text-white transition"
-              style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+              className="text-[11px] text-white/70 underline hover:text-white transition not-italic"
+              style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}
             >
               Ubah Konfirmasi
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left w-full" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left w-full not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
             {errorMessage && (
               <div className="bg-red-500/20 border border-red-500/30 text-red-100 px-3 py-2 rounded-lg text-xs">
                 {errorMessage}
@@ -179,7 +179,7 @@ export default function RSVPSection({ invitationId, guestName }) {
         transition={{ delay: 0.3 }}
         className="mt-12 mb-4 flex justify-center"
       >
-        <img src={catMerged} alt="Cat" className="w-24 min-[400px]:w-32 h-auto drop-shadow-md pointer-events-none" />
+        <img src={catMerged} alt="Cat" className="w-20 min-[400px]:w-32 h-auto drop-shadow-md pointer-events-none" />
       </motion.div>
 
     </section>

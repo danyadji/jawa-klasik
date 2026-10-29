@@ -5,9 +5,20 @@ import bgOrnamen from '../assets/illustrations/bg-ornamen-2.png';
 import catImg from '../assets/illustrations/cat-merged.png';
 import arrowSign from '../assets/illustrations/tanda-panah-kanan.png'; 
 
-const MapPinIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-[14px] w-[14px] mr-2" viewBox="0 0 384 512" fill="currentColor">
-    <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+const FoldedMapIcon = () => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    className="h-[14px] w-[14px] mr-2 flex-shrink-0" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+    <line x1="9" y1="3" x2="9" y2="18" />
+    <line x1="15" y1="6" x2="15" y2="21" />
   </svg>
 );
 
@@ -50,22 +61,26 @@ export default function EventDetails({ events }) {
     {
       title: 'Resepsi',
       date: 'Sabtu, 2* Maret 202*',
-      time: 'Pukul 09.30',
-      location: 'Di Gedung Mawar',
+      time: 'Pukul 10.00',
+      location: 'Di Gedung Melati',
       address: 'Jl. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       url: '#'
     },
     {
       title: 'Ngunduh Mantu',
-      date: 'Minggu, 2* Maret 202*',
-      time: 'Pukul 08.00',
-      location: 'Di Gedung Melati',
+      date: 'Sabtu, 2* Maret 202*',
+      time: 'Pukul 10.00',
+      location: 'Di Gedung Kenanga',
       address: 'Jl. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       url: '#'
     }
   ];
 
-  const displayEvents = events?.length ? events : defaultEvents;
+  const displayEvents = (!events || events.length === 0)
+    ? defaultEvents
+    : (events.length === 2 
+        ? [...events, defaultEvents[2]] 
+        : events);
 
   return (
     <section className="relative w-full flex flex-col items-center py-4 z-20 overflow-visible">
@@ -85,25 +100,25 @@ export default function EventDetails({ events }) {
                 transition={{ delay: idx * 0.2 }}
                 className="flex flex-col items-center text-center w-full"
               >
-                <h3 className="text-4xl min-[400px]:text-5xl text-[#877d5e] mb-4" style={{ fontFamily: 'Great Vibes, cursive' }}>
+                <h3 className="text-4xl min-[400px]:text-5xl text-[#7c8363] mb-3 italic" style={{ fontFamily: 'Great Vibes, cursive' }}>
                   {event.title}
                 </h3>
                 
-                <div className="font-isi text-[#4d3a30] text-[11px] min-[375px]:text-[13px] leading-relaxed mb-4" style={{ fontFamily: 'Futura Md BT, sans-serif' }}>
-                  {event.date ? <p className="font-bold">{event.date}</p> : null}
-                  {event.time ? <p>{event.time}</p> : null}
-                  {event.location ? <p className="font-bold mt-2">{event.location}</p> : null}
-                  {event.address ? <p className="opacity-80 leading-snug max-w-[200px] mx-auto">{event.address}</p> : null}
+                <div className="font-isi not-italic text-[#4d3a30] text-[13px] min-[375px]:text-[14px] min-[400px]:text-[18px] leading-tight mb-3" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
+                  {event.date ? <p className="font-bold not-italic" style={{ fontStyle: 'normal', fontWeight: 700, WebkitTextStroke: '0.45px currentColor' }}>{event.date}</p> : null}
+                  {event.time ? <p className="font-bold not-italic" style={{ fontStyle: 'normal', fontWeight: 700, WebkitTextStroke: '0.45px currentColor' }}>{event.time}</p> : null}
+                  {event.location ? <p className="font-bold not-italic" style={{ fontStyle: 'normal', fontWeight: 700, WebkitTextStroke: '0.45px currentColor' }}>{event.location}</p> : null}
+                  {event.address ? <p className="font-medium opacity-90 text-[11px] min-[375px]:text-[12px] min-[400px]:text-[12.5px] leading-snug max-w-[220px] mx-auto mt-2 not-italic" style={{ fontStyle: 'normal', fontWeight: 500, WebkitTextStroke: '0.2px currentColor' }}>{event.address}</p> : null}
                 </div>
 
                 <a 
                   href={mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center bg-[#6b492b] text-white py-2 px-6 rounded-md font-bold text-[10px] min-[375px]:text-[11px] tracking-wider hover:bg-[#4d3a30] active:scale-95 transition-all shadow-sm hover:shadow-md cursor-pointer"
-                  style={{ fontFamily: 'Futura Md BT, sans-serif' }}
+                  className="flex items-center justify-center bg-[#6b492b] text-white py-2 px-6 rounded-lg font-bold text-[11px] min-[375px]:text-[12px] tracking-wider hover:bg-[#4d3a30] active:scale-95 transition-all shadow-sm hover:shadow-md cursor-pointer not-italic"
+                  style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}
                 >
-                  <MapPinIcon />
+                  <FoldedMapIcon />
                   LIHAT LOKASI
                 </a>
               </motion.div>
@@ -117,7 +132,7 @@ export default function EventDetails({ events }) {
           transition={{ duration: 1 }}
           src={arrowSign} 
           alt="Sign" 
-          className="absolute left-0 top-[40%] w-24 min-[400px]:w-32 h-auto z-20 pointer-events-none drop-shadow-md"
+          className="absolute left-0 top-[35%] w-24 min-[400px]:w-32 h-auto z-20 pointer-events-none drop-shadow-md"
           loading="lazy"
           decoding="async"
         />
@@ -128,7 +143,7 @@ export default function EventDetails({ events }) {
           transition={{ duration: 1, delay: 0.5 }}
           src={catImg} 
           alt="Cat" 
-          className="absolute right-0 bottom-0 w-48 min-[400px]:w-56 h-auto z-20 pointer-events-none drop-shadow-md"
+          className="absolute right-0 bottom-[-5px] w-48 min-[400px]:w-56 h-auto z-20 pointer-events-none drop-shadow-md"
           loading="lazy"
           decoding="async"
         />

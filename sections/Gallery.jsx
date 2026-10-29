@@ -7,8 +7,19 @@ function getYoutubeId(url) {
   return match ? match[1] : null;
 }
 
+function prepareLoopItems(list, minCount = 6) {
+  if (!list || list.length === 0) return [];
+  let result = [...list];
+  while (result.length < minCount) {
+    result = [...result, ...list];
+  }
+  return result;
+}
+
 export default function Gallery({ photos = [], videoUrl = '' }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [row1Paused, setRow1Paused] = useState(false);
+  const [row2Paused, setRow2Paused] = useState(false);
 
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -19,13 +30,27 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
 
   const cleanPhotos = Array.isArray(photos) ? photos.filter(Boolean) : [];
   const hasPhotos = cleanPhotos.length > 0;
-  
-  const portraitPhotos = hasPhotos 
-    ? (cleanPhotos.length <= 4 ? cleanPhotos : cleanPhotos.slice(0, Math.ceil(cleanPhotos.length / 2)))
-    : [];
-  const landscapePhotos = hasPhotos && cleanPhotos.length > 4
-    ? cleanPhotos.slice(Math.ceil(cleanPhotos.length / 2))
-    : [];
+
+  // Split photos for Row 1 (top) and Row 2 (bottom)
+  let topRaw = [];
+  let bottomRaw = [];
+
+  if (hasPhotos) {
+    if (cleanPhotos.length <= 3) {
+      topRaw = cleanPhotos;
+      bottomRaw = [...cleanPhotos].reverse();
+    } else {
+      const mid = Math.ceil(cleanPhotos.length / 2);
+      topRaw = cleanPhotos.slice(0, mid);
+      bottomRaw = cleanPhotos.slice(mid);
+    }
+  } else {
+    topRaw = [1, 2, 3, 4, 5];
+    bottomRaw = [6, 7, 8, 9];
+  }
+
+  const row1Items = prepareLoopItems(topRaw, 6);
+  const row2Items = prepareLoopItems(bottomRaw, 6);
 
   const youtubeId = getYoutubeId(videoUrl);
 
@@ -34,75 +59,127 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
       
       <motion.h3 
         {...fadeInUp}
-        className="text-xl min-[400px]:text-2xl text-[#6b492b] mb-6 tracking-widest uppercase" 
-        style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}
+        className="text-xl font-bold min-[400px]:text-2xl text-[#6b492b] mb-6 tracking-widest uppercase not-italic" 
+        style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}
       >
         Gallery
       </motion.h3>
 
-      {/* Row 1: Portrait / Grid Slider */}
+      {/* Row 1: Top Images - Slider ke Kanan (Slide to Right) */}
       <motion.div 
         {...fadeInUp}
         transition={{ delay: 0.2 }}
-        className="w-full relative mb-2"
+        className="w-full relative mb-3 overflow-hidden select-none cursor-grab active:cursor-grabbing"
+        onMouseEnter={() => setRow1Paused(true)}
+        onMouseLeave={() => setRow1Paused(false)}
+        onTouchStart={() => setRow1Paused(true)}
+        onTouchEnd={() => setRow1Paused(false)}
+        onPointerDown={() => setRow1Paused(true)}
+        onPointerUp={() => setRow1Paused(false)}
       >
-        <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory pb-2 px-6 min-[400px]:px-10" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {hasPhotos ? portraitPhotos.map((src, idx) => (
-            <div
-              key={`portrait-${idx}`}
-              className="flex-none w-[140px] min-[400px]:w-[160px] aspect-[3/4] bg-white rounded-xl shadow-sm border border-black/5 snap-start overflow-hidden"
-            >
-              <img src={src} alt={`Galeri ${idx + 1}`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
-            </div>
-          )) : [1, 2, 3, 4, 5].map((item) => (
-            <div 
-              key={`portrait-empty-${item}`} 
-              className="flex-none w-[140px] min-[400px]:w-[160px] aspect-[3/4] bg-white rounded-xl shadow-sm border border-black/5 snap-start flex items-center justify-center"
-            >
-              <span className="text-[#8c7457]/50 text-[10px] font-bold uppercase tracking-widest">Foto {item}</span>
-            </div>
-          ))}
-        </div>
-        
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-full flex items-center justify-end pr-2 pointer-events-none">
-          <svg className="w-6 h-6 text-black/60" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-        </div>
-      </motion.div>
-
-      {/* Row 2: Landscape Slider (hanya jika foto > 4 atau tidak ada foto) */}
-      {(landscapePhotos.length > 0 || !hasPhotos) && (
-        <motion.div 
-          {...fadeInUp}
-          transition={{ delay: 0.3 }}
-          className="w-full relative mb-4"
+        <div 
+          className="marquee-track flex w-max"
+          style={{
+            animation: 'marqueeRight 55s linear infinite',
+            animationPlayState: row1Paused ? 'paused' : 'running',
+            willChange: 'transform'
+          }}
         >
-          <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory pb-2 px-6 min-[400px]:px-10" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {hasPhotos ? landscapePhotos.map((src, idx) => (
+          {/* Track A */}
+          <div className="flex gap-3 pr-3 shrink-0">
+            {row1Items.map((item, idx) => (
               <div
-                key={`landscape-${idx}`}
-                className="flex-none w-[220px] min-[400px]:w-[260px] aspect-[4/3] bg-white rounded-xl shadow-sm border border-black/5 snap-start overflow-hidden"
+                key={`r1-a-${idx}`}
+                className="flex-none w-[145px] min-[400px]:w-[165px] aspect-[3/4] bg-white rounded-2xl shadow-sm border border-black/5 overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
               >
-                <img src={src} alt={`Galeri landscape ${idx + 1}`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
-              </div>
-            )) : [1, 2, 3, 4].map((item) => (
-              <div 
-                key={`landscape-empty-${item}`} 
-                className="flex-none w-[220px] min-[400px]:w-[260px] aspect-[4/3] bg-white rounded-xl shadow-sm border border-black/5 snap-start flex items-center justify-center"
-              >
-                <span className="text-[#8c7457]/50 text-[10px] font-bold uppercase tracking-widest">Foto {item + 5}</span>
+                {hasPhotos ? (
+                  <img src={item} alt={`Galeri ${idx + 1}`} className="w-full h-full object-cover pointer-events-none" loading="lazy" decoding="async" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-white/80">
+                    <span className="text-[#8c7457]/50 text-[10px] font-bold uppercase tracking-widest">Foto {item}</span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
-          
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-full flex items-center justify-start pl-2 pointer-events-none">
-            <svg className="w-6 h-6 text-black/60" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M16 5v14l-11-7z" />
-            </svg>
+
+          {/* Track B (clone for infinite seamless loop) */}
+          <div className="flex gap-3 pr-3 shrink-0" aria-hidden="true">
+            {row1Items.map((item, idx) => (
+              <div
+                key={`r1-b-${idx}`}
+                className="flex-none w-[145px] min-[400px]:w-[165px] aspect-[3/4] bg-white rounded-2xl shadow-sm border border-black/5 overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+              >
+                {hasPhotos ? (
+                  <img src={item} alt="" className="w-full h-full object-cover pointer-events-none" loading="lazy" decoding="async" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-white/80">
+                    <span className="text-[#8c7457]/50 text-[10px] font-bold uppercase tracking-widest">Foto {item}</span>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        </motion.div>
-      )}
+        </div>
+      </motion.div>
+
+      {/* Row 2: Bottom Images - Slider ke Kiri (Slide to Left, sebelum YouTube) */}
+      <motion.div 
+        {...fadeInUp}
+        transition={{ delay: 0.3 }}
+        className="w-full relative mb-6 overflow-hidden select-none cursor-grab active:cursor-grabbing"
+        onMouseEnter={() => setRow2Paused(true)}
+        onMouseLeave={() => setRow2Paused(false)}
+        onTouchStart={() => setRow2Paused(true)}
+        onTouchEnd={() => setRow2Paused(false)}
+        onPointerDown={() => setRow2Paused(true)}
+        onPointerUp={() => setRow2Paused(false)}
+      >
+        <div 
+          className="marquee-track flex w-max"
+          style={{
+            animation: 'marqueeLeft 55s linear infinite',
+            animationPlayState: row2Paused ? 'paused' : 'running',
+            willChange: 'transform'
+          }}
+        >
+          {/* Track A */}
+          <div className="flex gap-3 pr-3 shrink-0">
+            {row2Items.map((item, idx) => (
+              <div
+                key={`r2-a-${idx}`}
+                className="flex-none w-[220px] min-[400px]:w-[250px] aspect-[4/3] bg-white rounded-2xl shadow-sm border border-black/5 overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+              >
+                {hasPhotos ? (
+                  <img src={item} alt={`Galeri ${idx + 1}`} className="w-full h-full object-cover pointer-events-none" loading="lazy" decoding="async" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-white/80">
+                    <span className="text-[#8c7457]/50 text-[10px] font-bold uppercase tracking-widest">Foto {item}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Track B (clone for infinite seamless loop) */}
+          <div className="flex gap-3 pr-3 shrink-0" aria-hidden="true">
+            {row2Items.map((item, idx) => (
+              <div
+                key={`r2-b-${idx}`}
+                className="flex-none w-[220px] min-[400px]:w-[250px] aspect-[4/3] bg-white rounded-2xl shadow-sm border border-black/5 overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+              >
+                {hasPhotos ? (
+                  <img src={item} alt="" className="w-full h-full object-cover pointer-events-none" loading="lazy" decoding="async" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-white/80">
+                    <span className="text-[#8c7457]/50 text-[10px] font-bold uppercase tracking-widest">Foto {item}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
 
       {/* Video / YouTube Section with interactive preview */}
       {(videoUrl || youtubeId) && (
@@ -140,7 +217,7 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
                     </div>
                   </div>
                   <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between pointer-events-none">
-                    <span className="text-white text-xs font-semibold drop-shadow-md bg-black/40 px-2.5 py-1 rounded-md">
+                    <span className="text-white text-xs font-semibold drop-shadow-md bg-black/40 px-2.5 py-1 rounded-md not-italic">
                       Tonton di YouTube
                     </span>
                   </div>
@@ -159,8 +236,25 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
       )}
 
       <style dangerouslySetInnerHTML={{__html: `
-        .flex::-webkit-scrollbar {
-          display: none;
+        @keyframes marqueeRight {
+          0% {
+            transform: translate3d(-50%, 0, 0);
+          }
+          100% {
+            transform: translate3d(0%, 0, 0);
+          }
+        }
+        @keyframes marqueeLeft {
+          0% {
+            transform: translate3d(0%, 0, 0);
+          }
+          100% {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+        .marquee-track:hover,
+        .marquee-track:active {
+          animation-play-state: paused !important;
         }
       `}} />
     </section>

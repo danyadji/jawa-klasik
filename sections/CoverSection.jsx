@@ -105,7 +105,7 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
                 className="w-11/12 max-w-[320px] h-auto drop-shadow-xl"
               />
               
-              <div className="absolute inset-0 flex items-center justify-center pt-[10%] min-[400px]:pt-[8%]">
+              <div className="absolute inset-0 flex items-center justify-center pt-[11%] min-[400px]:pt-[12%]">
                 <motion.h1 
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}

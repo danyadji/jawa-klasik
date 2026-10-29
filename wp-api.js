@@ -183,7 +183,7 @@ async function mapAcfToInvitation(post) {
 
   const events = [
     {
-      title: a.akad_title,
+      title: a.akad_title || 'Akad Nikah',
       date: a.akad_date,
       time: a.akad_time,
       location: a.akad_location,
@@ -191,14 +191,22 @@ async function mapAcfToInvitation(post) {
       url: a.akad_maps_url,
     },
     {
-      title: a.resepsi_title,
+      title: a.resepsi_title || 'Resepsi',
       date: a.resepsi_date,
       time: a.resepsi_time,
       location: a.resepsi_location,
       address: a.resepsi_address,
       url: a.resepsi_maps_url,
     },
-  ].filter((e) => e.title || e.date || e.location);
+    {
+      title: a.ngunduh_mantu_title || 'Ngunduh Mantu',
+      date: a.ngunduh_mantu_date,
+      time: a.ngunduh_mantu_time,
+      location: a.ngunduh_mantu_location,
+      address: a.ngunduh_mantu_address,
+      url: a.ngunduh_mantu_maps_url,
+    },
+  ].filter((e) => e.title && (e.date || e.location || e.address || e.time));
 
   // Gallery: prioritaskan gallery_urls dari backend (array URL bersih)
   const gallery = (Array.isArray(post.gallery_urls) && post.gallery_urls.length > 0)

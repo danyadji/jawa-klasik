@@ -5,6 +5,8 @@ import gapuraKiri from '../assets/illustrations/gapura-kiri.png';
 import gapuraKanan from '../assets/illustrations/gapura-kanan.png';
 import couplePhoto from '../assets/illustrations/KEDUA-MEMPELAI-BACKGORUND-PELAMINAN.jpg';
 import bgPenutup2 from '../assets/illustrations/bg-surat-pambuka.png';
+import logoDiamora from '../assets/illustrations/logo-diamora.png';
+import ShinyText from '../components/ShinyText';
 
 export default function ClosingSection({ groomNickname, brideNickname, photo }) {
   const fadeInUp = {
@@ -47,8 +49,8 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
         <motion.p
           {...fadeInUp}
           transition={{ delay: 0.2 }}
-          className="text-[#4d3a30] text-[11px] min-[400px]:text-[12px] text-center leading-relaxed px-10 min-[400px]:px-14 mt-4 mb-2"
-          style={{ fontFamily: 'Futura Md BT, sans-serif', fontStyle: 'italic' }}
+          className="text-[#4d3a30] text-[11px] min-[400px]:text-[13px] text-center leading-relaxed px-10 min-[400px]:px-14 mt-8 mb-8"
+          style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}
         >
           Merupakan kebahagiaan tersendiri bagi kami apabila Bapak/Ibu/Saudara/i
           berkenan hadir di hari yang penuh makna ini. Atas segala doa, ucapan,
@@ -78,7 +80,7 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
 
         <div className="relative w-full flex items-end justify-between mt-1 pointer-events-none">
           <motion.img
-           initial={{ x: 30, opacity: 0 }}
+            initial={{ x: 30, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8 }}
@@ -94,12 +96,14 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
             transition={{ delay: 0.5 }}
             className="flex flex-col items-center justify-end pb-8 pointer-events-auto flex-1"
           >
-            <span
-              className="text-[#4d3a30] tracking-[0.3em] uppercase text-[11px] min-[400px]:text-[13px] font-bold"
-              style={{ fontFamily: 'var(--font-wedding-gift-title)' }}
-            >
-              ✦ DIAMORA
-            </span>
+            <ShinyText
+              image={logoDiamora}
+              shineColor="#ffffff"
+              speed={2.8}
+              shineWidth={50}
+              imgClassName="h-4 min-[400px]:h-[24px] w-auto object-contain opacity-80 drop-shadow-sm pointer-events-none"
+              alt="Diamora"
+            />
           </motion.div>
 
           <motion.img
