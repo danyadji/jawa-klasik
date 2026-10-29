@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import vinylImg from '../assets/illustrations/vinyl-button-for-music-play.png'
+import vinylImg from '../assets/illustrations/vinyl-button-for-music-play.webp'
 
 const DEFAULT_WEDDING_MUSIC = 'https://assets.mixkit.co/music/preview/mixkit-wedding-waltz-238.mp3'
 

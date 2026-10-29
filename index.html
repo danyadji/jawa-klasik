@@ -4,18 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Undangan Pernikahan Jawa Klasik</title>
-    <!-- Google Fonts & Material Symbols -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap"
-      rel="stylesheet"
+    <meta
+      name="description"
+      content="Undangan Pernikahan Digital dengan tema Jawa Klasik yang elegan, sakral, dan penuh makna."
     />
-    <!-- Font Awesome 6 -->
+    <meta name="theme-color" content="#2b2118" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Undangan Pernikahan Jawa Klasik" />
+    <meta
+      property="og:description"
+      content="Undangan Pernikahan Digital dengan tema Jawa Klasik yang elegan, sakral, dan penuh makna."
+    />
+    <meta property="og:image" content="/og-image.jpg" />
+
+    <!-- Preload LCP background image -->
+    <link rel="preload" as="image" href="/bg.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Font Awesome 6 (Non-render-blocking) -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      />
+    </noscript>
   </head>
   <body class="bg-[#2b2118]">
     <div id="root"></div>

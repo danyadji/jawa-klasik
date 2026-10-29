@@ -1,37 +1,37 @@
 @font-face {
   font-family: 'Chyntia Oesman Sans';
-  src: url('./assets/fonts/chyntia-oesman-chyntia-oesman-regular-sans-modern-400.otf') format('opentype');
+  src: url('./assets/fonts/chyntia-oesman-regular-sans-modern.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Futura Bk BT';
-  src: url('./assets/fonts/Futura Bk BT Book.ttf') format('truetype');
+  src: url('./assets/fonts/Futura-Bk-BT-Book.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Futura Md BT';
-  src: url('./assets/fonts/Futura Bk BT Book Italic.ttf') format('truetype');
+  src: url('./assets/fonts/Futura-Bk-BT-Book-Italic.woff2') format('woff2');
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Photograph Signature';
-  src: url('./assets/fonts/Photograph Signature.ttf') format('truetype');
+  src: url('./assets/fonts/Photograph-Signature.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Great Vibes';
-  src: url('./assets/fonts/GreatVibes-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/GreatVibes-Regular.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Century Gothic';
-  src: url('./assets/fonts/GOTHICB.TTF') format('truetype');
+  src: url('./assets/fonts/GOTHICB.woff2') format('woff2');
   font-weight: 700;
   font-display: swap;
 }

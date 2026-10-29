@@ -1,32 +1,62 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import './jawa-klasik.css';
 
-// Layout sections
+// Layout sections: CoverSection is statically imported for instant initial paint & LCP
 import CoverSection from './sections/CoverSection';
-import VideoSection from './sections/VideoSection';
-import CoupleProfile from './sections/CoupleProfile';
-import EventDetails from './sections/EventDetails';
-import CountdownTimer from './sections/CountdownTimer';
-import WeddingGift from './sections/WeddingGift';
-import RSVPSection from './sections/RSVPSection';
-import OurStory from './sections/OurStory';
-import Gallery from './sections/Gallery';
-import GuestBookSection from './sections/GuestBookSection';
-import ClosingSection from './sections/ClosingSection';
 
-// Shared components
-import MusicToggle from './components/MusicToggle';
-import BottomNavbar from './components/BottomNavbar';
+// Lazy-loaded post-cover sections for code splitting
+const VideoSection = lazy(() => import('./sections/VideoSection'));
+const CoupleProfile = lazy(() => import('./sections/CoupleProfile'));
+const EventDetails = lazy(() => import('./sections/EventDetails'));
+const CountdownTimer = lazy(() => import('./sections/CountdownTimer'));
+const WeddingGift = lazy(() => import('./sections/WeddingGift'));
+const RSVPSection = lazy(() => import('./sections/RSVPSection'));
+const OurStory = lazy(() => import('./sections/OurStory'));
+const Gallery = lazy(() => import('./sections/Gallery'));
+const GuestBookSection = lazy(() => import('./sections/GuestBookSection'));
+const ClosingSection = lazy(() => import('./sections/ClosingSection'));
+
+// Shared components lazy-loaded
+const MusicToggle = lazy(() => import('./components/MusicToggle'));
+const BottomNavbar = lazy(() => import('./components/BottomNavbar'));
 
 // Assets
-import pelaminanMerged from './assets/illustrations/pelaminan- (merged).png';
-import bgImage from './assets/backgrounds/bg.jpg';
+import pelaminanMerged from './assets/illustrations/pelaminan- (merged).webp';
 import { DEFAULT_INVITATION } from './defaultData';
+
+// Prefetch post-cover components during browser idle time
+function prefetchPostCover() {
+  import('./sections/VideoSection');
+  import('./sections/CoupleProfile');
+  import('./sections/EventDetails');
+  import('./sections/CountdownTimer');
+  import('./sections/WeddingGift');
+  import('./sections/RSVPSection');
+  import('./sections/OurStory');
+  import('./sections/Gallery');
+  import('./sections/GuestBookSection');
+  import('./sections/ClosingSection');
+  import('./components/MusicToggle');
+  import('./components/BottomNavbar');
+}
 
 export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Undangan' }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const scrollContainerRef = useRef(null);
+
+  // Prefetch sections after cover has loaded and browser is idle
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        const id = window.requestIdleCallback(prefetchPostCover, { timeout: 2000 });
+        return () => window.cancelIdleCallback?.(id);
+      } else {
+        const t = setTimeout(prefetchPostCover, 1500);
+        return () => clearTimeout(t);
+      }
+    }
+  }, []);
 
   // Robust data merge: pastikan properti penting tidak pernah undefined
   const data = {
@@ -50,7 +80,7 @@ export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Un
         {/* Background Fixed untuk semua section (terkunci di frame 500px, tidak kepotong) */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
-            src={bgImage}
+            src="/bg.webp"
             alt="Background"
             className="w-full h-full object-cover object-center"
             fetchpriority="high"
@@ -72,7 +102,7 @@ export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Un
         )}
 
         {isOpen && (
-          <>
+          <Suspense fallback={null}>
             <MusicToggle
               musicUrl={data.musicUrl}
               isPlaying={isMusicPlaying}
@@ -149,7 +179,7 @@ export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Un
                 photo={data.couplePhoto}
               />
             </div>
-          </>
+          </Suspense>
         )}
       </main>
     </div>

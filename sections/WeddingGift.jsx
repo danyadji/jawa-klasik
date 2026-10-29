@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import bgWeddingGift from '../assets/illustrations/BG-WEDDING-GIFT.png';
+import bgWeddingGift from '../assets/illustrations/BG-WEDDING-GIFT.webp';
 
 export default function WeddingGift({
   bankAccounts = [],

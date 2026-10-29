@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import gunungan from '../assets/illustrations/gunungan.png';
-import gapuraKiri from '../assets/illustrations/gapura-kiri.png';
-import gapuraKanan from '../assets/illustrations/gapura-kanan.png';
-import couplePhoto from '../assets/illustrations/KEDUA-MEMPELAI-BACKGORUND-PELAMINAN.jpg';
-import bgPenutup2 from '../assets/illustrations/bg-surat-pambuka.png';
-import logoDiamora from '../assets/illustrations/logo-diamora.png';
+import gunungan from '../assets/illustrations/gunungan.webp';
+import gapuraKiri from '../assets/illustrations/gapura-kiri.webp';
+import gapuraKanan from '../assets/illustrations/gapura-kanan.webp';
+import couplePhoto from '../assets/illustrations/KEDUA-MEMPELAI-BACKGORUND-PELAMINAN.webp';
+import bgPenutup2 from '../assets/illustrations/bg-surat-pambuka.webp';
+import logoDiamora from '../assets/illustrations/logo-diamora.webp';
 import ShinyText from '../components/ShinyText';
 
 export default function ClosingSection({ groomNickname, brideNickname, photo }) {

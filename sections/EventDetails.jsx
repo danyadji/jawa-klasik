@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import bgOrnamen from '../assets/illustrations/bg-ornamen-2.png';
-import catImg from '../assets/illustrations/cat-merged.png';
-import arrowSign from '../assets/illustrations/tanda-panah-kanan.png';
+import bgOrnamen from '../assets/illustrations/bg-ornamen-2.webp';
+import catImg from '../assets/illustrations/cat-merged.webp';
+import arrowSign from '../assets/illustrations/tanda-panah-kanan.webp';
 
 const FoldedMapIcon = () => (
   <svg

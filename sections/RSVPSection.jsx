@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { submitRsvp } from '../../../shared/wp-api';
 
-import kupu2 from '../assets/illustrations/kupu-2.png';
-import catMerged from '../assets/illustrations/kucing-rsvp.png';
+import kupu2 from '../assets/illustrations/kupu-2.webp';
+import catMerged from '../assets/illustrations/kucing-rsvp.webp';
 
 export default function RSVPSection({ invitationId, guestName }) {
   const fadeInUp = {

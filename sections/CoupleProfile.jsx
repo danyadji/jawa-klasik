@@ -1,15 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import priaPhoto from '../assets/illustrations/PRIA-BACKGORUND-PELAMINAN.jpg';
-import wanitaPhoto from '../assets/illustrations/WANITA-BACKGORUND-PELAMINAN.jpg';
-import doveImg from '../assets/illustrations/merpati-terbang.png';
-import janurKiri from '../assets/illustrations/janur-kuning-kiri.png';
-import janurKanan from '../assets/illustrations/janur-kuning-kanan.png';
-import flowerLeft from '../assets/illustrations/bunga-kiri.png';
-import flowerRight from '../assets/illustrations/bunga-kanan.png';
-import igIcon from '../assets/illustrations/instagram-button.png';
-import bgOrnamen2 from '../assets/illustrations/bg-ornamen-2.png';
+import priaPhoto from '../assets/illustrations/PRIA-BACKGORUND-PELAMINAN.webp';
+import wanitaPhoto from '../assets/illustrations/WANITA-BACKGORUND-PELAMINAN.webp';
+import doveImg from '../assets/illustrations/merpati-terbang.webp';
+import janurKiri from '../assets/illustrations/janur-kuning-kiri.webp';
+import janurKanan from '../assets/illustrations/janur-kuning-kanan.webp';
+import flowerLeft from '../assets/illustrations/bunga-kiri.webp';
+import flowerRight from '../assets/illustrations/bunga-kanan.webp';
+import igIcon from '../assets/illustrations/instagram-button.webp';
+import bgOrnamen2 from '../assets/illustrations/bg-ornamen-2.webp';
 
 function formatQuote(text) {
   if (!text) return { body: '', source: '' };

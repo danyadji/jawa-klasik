@@ -11,6 +11,11 @@ export default defineConfig({
     },
   },
   assetsInclude: ['**/*.MP4', '**/*.mp4'],
+  build: {
+    minify: 'esbuild',
+    cssMinify: true,
+    target: 'es2020',
+  },
   server: {
     port: 5173,
     open: false,

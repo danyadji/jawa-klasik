@@ -1,15 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ShinyText from '../components/ShinyText';
-import bgImage from '../assets/backgrounds/bg.jpg';
-import boardName from '../assets/illustrations/board-name.png';
-import bungaTop from '../assets/illustrations/bunga11.png';
-import bungaBottom from '../assets/illustrations/bunga-2.png';
-import janurKiri from '../assets/illustrations/janur-kuning-kiri.png';
-import janurKanan from '../assets/illustrations/janur-kuning-kanan.png';
-import kupu1 from '../assets/illustrations/kupu-1.png';
-import kupu2 from '../assets/illustrations/kupu-2.png';
-import batuan from '../assets/illustrations/batuan.png';
+import boardName from '../assets/illustrations/board-name.webp';
+import bungaTop from '../assets/illustrations/bunga11.webp';
+import bungaBottom from '../assets/illustrations/bunga-2.webp';
+import janurKiri from '../assets/illustrations/janur-kuning-kiri.webp';
+import janurKanan from '../assets/illustrations/janur-kuning-kanan.webp';
+import kupu1 from '../assets/illustrations/kupu-1.webp';
+import kupu2 from '../assets/illustrations/kupu-2.webp';
+import batuan from '../assets/illustrations/batuan.webp';
 
 export default function CoverSection({ guestName, groomNickname, brideNickname, onOpen }) {
   return (
@@ -17,7 +16,7 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
       <main className="relative w-full max-w-[500px] h-screen shadow-2xl overflow-hidden bg-white mx-auto flex flex-col items-center">
         <div className="absolute inset-0 z-0">
           <img
-            src={bgImage}
+            src="/bg.webp"
             alt="Jawa Landscape"
             className="w-full h-full object-cover"
             fetchpriority="high"
