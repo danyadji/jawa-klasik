@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function CountdownTimer({ 
-  targetDate, 
-  dresscodeColors, 
+export default function CountdownTimer({
+  targetDate,
+  dresscodeColors,
   dresscodeInfo,
   groomName = 'Danu',
   brideName = 'Fifi',
@@ -151,7 +151,7 @@ export default function CountdownTimer({
 
   return (
     <section className="relative w-full flex flex-col items-center py-16 z-20 px-6 min-[400px]:px-10">
-      <motion.div 
+      <motion.div
         {...fadeInUp}
         className="w-full bg-[#edeae1] rounded-xl p-6 min-[400px]:p-8 flex flex-col items-center text-center shadow-md relative mb-16"
       >
@@ -161,20 +161,20 @@ export default function CountdownTimer({
         <p className="font-isi not-italic text-[#4d3a30] text-[12px] min-[375px]:text-[13px] min-[400px]:text-[14px] leading-relaxed mb-6" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
           {infoText}
         </p>
-        
+
         <div className="absolute -bottom-6 min-[400px]:-bottom-7 flex gap-3 min-[400px]:gap-4">
           {colors.map((color, idx) => (
-            <div 
+            <div
               key={idx}
-              className="w-12 h-12 min-[400px]:w-14 min-[400px]:h-14 rounded-full shadow-sm"
+              className="w-12 h-12 min-[400px]:w-14 min-[400px]:h-14 rounded-full  shadow-sm"
               style={{ backgroundColor: color }}
             />
           ))}
         </div>
       </motion.div>
 
-      <motion.div 
-        {...fadeInUp} 
+      <motion.div
+        {...fadeInUp}
         transition={{ delay: 0.2 }}
         className="flex flex-col items-center w-full mt-6"
       >
@@ -200,7 +200,7 @@ export default function CountdownTimer({
           ))}
         </div>
 
-        <button 
+        <button
           type="button"
           onClick={() => setIsModalOpen(true)}
           className="inline-flex items-center gap-2 bg-[#6b492b] text-white py-3 px-8 rounded-lg font-bold text-[11px] min-[375px]:text-xs tracking-widest hover:bg-[#4d3a30] active:scale-95 transition-all uppercase shadow-md cursor-pointer"
@@ -215,7 +215,7 @@ export default function CountdownTimer({
       {typeof document !== 'undefined' && createPortal(
         <AnimatePresence>
           {isModalOpen && (
-            <div 
+            <div
               className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
               onClick={() => setIsModalOpen(false)}
             >
@@ -242,7 +242,7 @@ export default function CountdownTimer({
                   <i className="fa-solid fa-calendar-days text-xl"></i>
                 </div>
 
-                <h4 
+                <h4
                   className="text-lg min-[400px]:text-xl font-bold text-[#4d3a30] mb-1 tracking-wider uppercase"
                   style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}
                 >

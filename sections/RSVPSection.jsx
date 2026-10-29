@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { submitRsvp } from '../wp-api';
+import { submitRsvp } from '../../../shared/wp-api';
 
 import kupu2 from '../assets/illustrations/kupu-2.png';
 import catMerged from '../assets/illustrations/kucing-rsvp.png';
@@ -53,23 +53,23 @@ export default function RSVPSection({ invitationId, guestName }) {
 
   return (
     <section className="relative w-full flex flex-col items-center py-12 z-20 px-6 min-[400px]:px-10">
-      
+
       {/* RSVP Box Container */}
-      <motion.div 
+      <motion.div
         {...fadeInUp}
         className="relative w-full bg-[#6b492b] rounded-xl p-6 min-[400px]:p-8 shadow-lg mt-8"
       >
         {/* Butterfly top left */}
-        <img 
-          src={kupu2} 
-          alt="Butterfly" 
+        <img
+          src={kupu2}
+          alt="Butterfly"
           className="absolute -top-6 -left-6 w-12 min-[400px]:w-14 h-auto drop-shadow-sm pointer-events-none"
         />
 
         <h3 className="text-2xl font-bold min-[400px]:text-3xl text-white text-center mb-4 tracking-widest not-italic" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
           RSVP
         </h3>
-        
+
         <p className="text-white text-center text-[10px] min-[375px]:text-[14px] leading-relaxed mb-6 not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
           Di hari yang penuh makna ini, kehadiran serta doa restu Bapak/Ibu/Saudara/i akan menjadi bagian indah dari perjalanan baru kami. Terima kasih atas segala doa dan kasih yang diberikan.
         </p>
@@ -104,8 +104,8 @@ export default function RSVPSection({ invitationId, guestName }) {
 
             <div className="flex flex-col">
               <label className="text-white text-[11px] min-[375px]:text-[13px] mb-1.5 ml-1">Nama *</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Nama lengkap Anda"
@@ -117,7 +117,7 @@ export default function RSVPSection({ invitationId, guestName }) {
             <div className="flex flex-col">
               <label className="text-white text-[11px] min-[375px]:text-[13px] mb-1.5 ml-1">Konfirmasi kehadiran *</label>
               <div className="relative">
-                <select 
+                <select
                   value={kehadiran}
                   onChange={(e) => setKehadiran(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#9c7247]"
@@ -137,7 +137,7 @@ export default function RSVPSection({ invitationId, guestName }) {
               <div className="flex flex-col">
                 <label className="text-white text-[11px] min-[375px]:text-[13px] mb-1.5 ml-1">Jumlah pengunjung *</label>
                 <div className="relative">
-                  <select 
+                  <select
                     value={jumlah}
                     onChange={(e) => setJumlah(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#9c7247]"
@@ -174,7 +174,7 @@ export default function RSVPSection({ invitationId, guestName }) {
       </motion.div>
 
       {/* Decorative Cat below */}
-      <motion.div 
+      <motion.div
         {...fadeInUp}
         transition={{ delay: 0.3 }}
         className="mt-12 mb-4 flex justify-center"

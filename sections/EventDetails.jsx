@@ -3,17 +3,17 @@ import { motion } from 'framer-motion';
 
 import bgOrnamen from '../assets/illustrations/bg-ornamen-2.png';
 import catImg from '../assets/illustrations/cat-merged.png';
-import arrowSign from '../assets/illustrations/tanda-panah-kanan.png'; 
+import arrowSign from '../assets/illustrations/tanda-panah-kanan.png';
 
 const FoldedMapIcon = () => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    className="h-[14px] w-[14px] mr-2 flex-shrink-0" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-[14px] w-[14px] mr-2 flex-shrink-0"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
     strokeLinejoin="round"
   >
     <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
@@ -78,14 +78,14 @@ export default function EventDetails({ events }) {
 
   const displayEvents = (!events || events.length === 0)
     ? defaultEvents
-    : (events.length === 2 
-        ? [...events, defaultEvents[2]] 
-        : events);
+    : (events.length === 2
+      ? [...events, defaultEvents[2]]
+      : events);
 
   return (
     <section className="relative w-full flex flex-col items-center py-4 z-20 overflow-visible">
       <div className="relative w-full flex flex-col items-center pt-16 pb-24">
-        <div 
+        <div
           className="absolute inset-y-0 left-0 right-0 z-0 bg-no-repeat bg-[size:100%_100%] mx-4 min-[400px]:mx-8"
           style={{ backgroundImage: `url(${bgOrnamen})` }}
         ></div>
@@ -94,16 +94,16 @@ export default function EventDetails({ events }) {
           {displayEvents.map((event, idx) => {
             const mapUrl = getGoogleMapsUrl(event);
             return (
-              <motion.div 
-                key={idx} 
-                {...fadeInUp} 
+              <motion.div
+                key={idx}
+                {...fadeInUp}
                 transition={{ delay: idx * 0.2 }}
                 className="flex flex-col items-center text-center w-full"
               >
                 <h3 className="text-4xl min-[400px]:text-5xl text-[#7c8363] mb-3 italic" style={{ fontFamily: 'Great Vibes, cursive' }}>
                   {event.title}
                 </h3>
-                
+
                 <div className="font-isi not-italic text-[#4d3a30] text-[13px] min-[375px]:text-[14px] min-[400px]:text-[18px] leading-tight mb-3" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
                   {event.date ? <p className="font-bold not-italic" style={{ fontStyle: 'normal', fontWeight: 700, WebkitTextStroke: '0.45px currentColor' }}>{event.date}</p> : null}
                   {event.time ? <p className="font-bold not-italic" style={{ fontStyle: 'normal', fontWeight: 700, WebkitTextStroke: '0.45px currentColor' }}>{event.time}</p> : null}
@@ -111,7 +111,7 @@ export default function EventDetails({ events }) {
                   {event.address ? <p className="font-medium opacity-90 text-[11px] min-[375px]:text-[12px] min-[400px]:text-[12.5px] leading-snug max-w-[220px] mx-auto mt-2 not-italic" style={{ fontStyle: 'normal', fontWeight: 500, WebkitTextStroke: '0.2px currentColor' }}>{event.address}</p> : null}
                 </div>
 
-                <a 
+                <a
                   href={mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -126,23 +126,23 @@ export default function EventDetails({ events }) {
           })}
         </div>
 
-        <motion.img 
+        <motion.img
           initial={{ x: -20, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 1 }}
-          src={arrowSign} 
-          alt="Sign" 
+          src={arrowSign}
+          alt="Sign"
           className="absolute left-0 top-[35%] w-24 min-[400px]:w-32 h-auto z-20 pointer-events-none drop-shadow-md"
           loading="lazy"
           decoding="async"
         />
 
-        <motion.img 
+        <motion.img
           initial={{ x: 20, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          src={catImg} 
-          alt="Cat" 
+          src={catImg}
+          alt="Cat"
           className="absolute right-0 bottom-[-5px] w-48 min-[400px]:w-56 h-auto z-20 pointer-events-none drop-shadow-md"
           loading="lazy"
           decoding="async"

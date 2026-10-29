@@ -36,7 +36,8 @@
   font-display: swap;
 }
 
-:root {
+/* Theme variables scoped to .tema-jawa-klasik */
+.tema-jawa-klasik {
   --font-nama: 'Great Vibes', cursive;
   --font-judul: 'Century Gothic', sans-serif;
   --font-isi: 'Futura Bk BT', sans-serif;
@@ -48,30 +49,35 @@
   --color-jawa-text: #4d3a30;
 }
 
-/* Custom styles for Jawa Klasik Template */
-
-.font-headline {
+/* Custom styles for Jawa Klasik Template scoped to .tema-jawa-klasik */
+.tema-jawa-klasik .font-headline {
   font-family: 'Century Gothic', sans-serif;
 }
 
-.font-body {
+.tema-jawa-klasik .font-body {
   font-family: 'Futura Bk BT', sans-serif;
 }
 
-.font-script {
+.tema-jawa-klasik .font-script {
   font-family: 'Great Vibes', cursive;
 }
 
-.font-noto {
+.tema-jawa-klasik .font-noto {
   font-family: 'Noto Serif', serif;
 }
 
-/* Animations */
-@keyframes fadeIn {
+/* Animations with prefix jawa- */
+@keyframes jawa-fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+@keyframes jawa-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tema-jawa-klasik .animate-fade-in,
+.tema-jawa-klasik.animate-fade-in {
+  animation: jawa-fade-in 0.8s ease-out forwards;
 }

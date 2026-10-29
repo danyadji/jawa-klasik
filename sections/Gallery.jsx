@@ -56,17 +56,17 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
 
   return (
     <section className="relative w-full flex flex-col items-center py-12 z-20 overflow-hidden">
-      
-      <motion.h3 
+
+      <motion.h3
         {...fadeInUp}
-        className="text-xl font-bold min-[400px]:text-2xl text-[#6b492b] mb-6 tracking-widest uppercase not-italic" 
+        className="text-xl font-bold min-[400px]:text-2xl text-[#6b492b] mb-6 tracking-widest uppercase not-italic"
         style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}
       >
         Gallery
       </motion.h3>
 
       {/* Row 1: Top Images - Slider ke Kanan (Slide to Right) */}
-      <motion.div 
+      <motion.div
         {...fadeInUp}
         transition={{ delay: 0.2 }}
         className="w-full relative mb-3 overflow-hidden select-none cursor-grab active:cursor-grabbing"
@@ -77,7 +77,7 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
         onPointerDown={() => setRow1Paused(true)}
         onPointerUp={() => setRow1Paused(false)}
       >
-        <div 
+        <div
           className="marquee-track flex w-max"
           style={{
             animation: 'marqueeRight 55s linear infinite',
@@ -124,7 +124,7 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
       </motion.div>
 
       {/* Row 2: Bottom Images - Slider ke Kiri (Slide to Left, sebelum YouTube) */}
-      <motion.div 
+      <motion.div
         {...fadeInUp}
         transition={{ delay: 0.3 }}
         className="w-full relative mb-6 overflow-hidden select-none cursor-grab active:cursor-grabbing"
@@ -135,7 +135,7 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
         onPointerDown={() => setRow2Paused(true)}
         onPointerUp={() => setRow2Paused(false)}
       >
-        <div 
+        <div
           className="marquee-track flex w-max"
           style={{
             animation: 'marqueeLeft 55s linear infinite',
@@ -183,7 +183,7 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
 
       {/* Video / YouTube Section with interactive preview */}
       {(videoUrl || youtubeId) && (
-        <motion.div 
+        <motion.div
           {...fadeInUp}
           transition={{ delay: 0.4 }}
           className="w-full px-6 min-[400px]:px-10 flex justify-center mb-10 mt-2"
@@ -199,13 +199,13 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
                   allowFullScreen
                 />
               ) : (
-                <div 
+                <div
                   onClick={() => setIsPlaying(true)}
                   className="relative w-full h-full group cursor-pointer"
                 >
-                  <img 
-                    src={`https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`} 
-                    alt="YouTube Video Thumbnail" 
+                  <img
+                    src={`https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`}
+                    alt="YouTube Video Thumbnail"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
@@ -224,10 +224,10 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
                 </div>
               )
             ) : (
-              <video 
-                src={videoUrl} 
-                controls 
-                preload="metadata" 
+              <video
+                src={videoUrl}
+                controls
+                preload="metadata"
                 className="w-full h-full object-cover"
               />
             )}
@@ -235,7 +235,8 @@ export default function Gallery({ photos = [], videoUrl = '' }) {
         </motion.div>
       )}
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes marqueeRight {
           0% {
             transform: translate3d(-50%, 0, 0);

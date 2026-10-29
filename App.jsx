@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route, useParams, useSearchParams } from 'react-router-dom';
 import { fetchUndangan } from './wp-api';
 import { DEFAULT_INVITATION } from './defaultData';
 import JawaKlasikTemplate from './JawaKlasikTemplate';
 
 function UndanganPage() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+  const guestName = searchParams.get('to') || 'Tamu Undangan';
   const [invitation, setInvitation] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,7 +40,7 @@ function UndanganPage() {
     );
   }
 
-  return <JawaKlasikTemplate initialData={invitation} />;
+  return <JawaKlasikTemplate data={invitation} guestName={guestName} />;
 }
 
 export default function App() {

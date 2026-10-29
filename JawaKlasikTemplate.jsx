@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
-import { fetchUndangan } from './wp-api';
+import { useState, useRef } from 'react';
 import './jawa-klasik.css';
 
 // Layout sections
@@ -17,67 +15,35 @@ import GuestBookSection from './sections/GuestBookSection';
 import ClosingSection from './sections/ClosingSection';
 
 // Shared components
-import MusicToggle from './sections/components/MusicToggle';
+import MusicToggle from './components/MusicToggle';
+import BottomNavbar from './components/BottomNavbar';
 
 // Assets
 import pelaminanMerged from './assets/illustrations/pelaminan- (merged).png';
 import bgImage from './assets/backgrounds/bg.jpg';
 import { DEFAULT_INVITATION } from './defaultData';
 
-export default function JawaKlasikTemplate({ initialData = null }) {
-  const { slug } = useParams();
-  const [searchParams] = useSearchParams();
-  const guestName = searchParams.get('to') || 'Tamu Undangan';
-
-  const [invitationData, setInvitationData] = useState(initialData || DEFAULT_INVITATION);
-  const [isLoading, setIsLoading] = useState(!initialData);
+export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Undangan' }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-
-  useEffect(() => {
-    if (initialData) {
-      setInvitationData(initialData);
-      setIsLoading(false);
-      return;
-    }
-    let cancelled = false;
-    setIsLoading(true);
-    // Ambil data dari WordPress (CPT undangan, by slug).
-    // Kalau WP mati / slug tidak ada, pakai data dummy biar template tetap bisa dibuka.
-    fetchUndangan(slug || 'danu-fifi')
-      .then((data) => {
-        if (!cancelled) {
-          setInvitationData(data || DEFAULT_INVITATION);
-          setIsLoading(false);
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setInvitationData(DEFAULT_INVITATION);
-          setIsLoading(false);
-        }
-      });
-    return () => { cancelled = true; };
-  }, [slug, initialData]);
+  const scrollContainerRef = useRef(null);
 
   // Robust data merge: pastikan properti penting tidak pernah undefined
   const data = {
     ...DEFAULT_INVITATION,
-    ...(invitationData || {}),
+    ...(rawData || {}),
     groom: {
       ...DEFAULT_INVITATION.groom,
-      ...(invitationData?.groom || {}),
+      ...(rawData?.groom || {}),
     },
     bride: {
       ...DEFAULT_INVITATION.bride,
-      ...(invitationData?.bride || {}),
+      ...(rawData?.bride || {}),
     },
   };
 
-  if (isLoading) return <div className="flex items-center justify-center min-h-screen font-body text-jawa-charcoal">Unduhan sedang dimuat...</div>;
-
   return (
-    <div className="w-full overflow-x-hidden relative"> 
+    <div className="tema-jawa-klasik w-full overflow-x-hidden relative"> 
       <main 
         className="max-w-[500px] mx-auto min-h-[100dvh] h-[100dvh] relative overflow-hidden bg-white shadow-2xl"
       >
@@ -113,64 +79,79 @@ export default function JawaKlasikTemplate({ initialData = null }) {
               onToggle={() => setIsMusicPlaying((prev) => !prev)}
             />
 
-            <div className="animate-fade-in absolute inset-0 overflow-y-auto overflow-x-hidden z-10">
-              <VideoSection
-                videoUrl={data.videoUrl}
-                onVideoPlay={() => setIsMusicPlaying(false)}
-              />
+            <BottomNavbar scrollContainerRef={scrollContainerRef} />
 
-              <CoupleProfile
-                groom={data.groom}
-                bride={data.bride}
-                quote={data.quote}
-              />
+            <div 
+              ref={scrollContainerRef}
+              className="animate-fade-in absolute inset-0 overflow-y-auto overflow-x-hidden pb-24 scroll-smooth z-10"
+            >
+              <div id="section-home">
+                <VideoSection
+                  videoUrl={data.videoUrl}
+                  onVideoPlay={() => setIsMusicPlaying(false)}
+                />
+              </div>
+
+              <div id="section-couple">
+                <CoupleProfile
+                  groom={data.groom}
+                  bride={data.bride}
+                  quote={data.quote}
+                />
+              </div>
             
-            <div className="w-full flex justify-center max-w-[480px] mx-auto relative z-10 -mt-24 mb-10 pointer-events-none">
-              <img src={pelaminanMerged} alt="Pelaminan" className="w-[70%] min-[400px]:w-[75%] h-auto drop-shadow-md" loading="lazy" decoding="async" />
+              <div className="w-full flex justify-center max-w-[480px] mx-auto relative z-10 -mt-24 mb-10 pointer-events-none">
+                <img src={pelaminanMerged} alt="Pelaminan" className="w-[70%] min-[400px]:w-[75%] h-auto drop-shadow-md" loading="lazy" decoding="async" />
+              </div>
+            
+              <div id="section-event">
+                <EventDetails events={data.events || []} />
+                
+                <CountdownTimer 
+                  targetDate={data.eventDate} 
+                  dresscodeColors={data.dresscodeColors}
+                  dresscodeInfo={data.dresscodeInfo}
+                  groomName={data.groom.nickname}
+                  brideName={data.bride.nickname}
+                  events={data.events}
+                />
+              </div>
+            
+              <div id="section-rsvp">
+                <RSVPSection
+                  invitationId={data.id}
+                  guestName={guestName}
+                />
+              </div>
+            
+              <OurStory stories={data.stories} />
+              
+              <Gallery photos={data.gallery} videoUrl={data.videoUrl} />
+              
+              <div id="section-gift">
+                <WeddingGift 
+                  bankAccounts={data.bankAccounts || []} 
+                  giftAddress={data.giftAddress}
+                  events={data.events}
+                  groomName={data.groom.nickname}
+                  brideName={data.bride.nickname}
+                />
+
+                <GuestBookSection
+                  invitationId={data.id}
+                  guestName={guestName}
+                />
+              </div>
+              
+              <ClosingSection 
+                groomNickname={data.groom.nickname}
+                brideNickname={data.bride.nickname}
+                photo={data.couplePhoto}
+              />
             </div>
-            
-            <EventDetails events={data.events || []} />
-            
-            <CountdownTimer 
-              targetDate={data.eventDate} 
-              dresscodeColors={data.dresscodeColors}
-              dresscodeInfo={data.dresscodeInfo}
-              groomName={data.groom.nickname}
-              brideName={data.bride.nickname}
-              events={data.events}
-            />
-            
-            <RSVPSection
-              invitationId={data.id}
-              guestName={guestName}
-            />
-            
-            <OurStory stories={data.stories} />
-            
-            <Gallery photos={data.gallery} videoUrl={data.videoUrl} />
-            
-            <WeddingGift 
-              bankAccounts={data.bankAccounts || []} 
-              giftAddress={data.giftAddress}
-              events={data.events}
-              groomName={data.groom.nickname}
-              brideName={data.bride.nickname}
-            />
-
-            <GuestBookSection
-              invitationId={data.id}
-              guestName={guestName}
-            />
-            
-            <ClosingSection 
-              groomNickname={data.groom.nickname}
-              brideNickname={data.bride.nickname}
-              photo={data.couplePhoto}
-            />
-          </div>
-        </>
-      )}
+          </>
+        )}
       </main>
     </div>
   );
-} 
+}

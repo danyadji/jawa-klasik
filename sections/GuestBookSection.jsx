@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { fetchUcapan, submitUcapan } from '../wp-api';
+import { fetchUcapan, submitUcapan } from '../../../shared/wp-api';
 
 export default function GuestBookSection({ invitationId, guestName }) {
   const fadeInUp = {
@@ -110,11 +110,10 @@ export default function GuestBookSection({ invitationId, guestName }) {
         >
           {statusMessage && (
             <div
-              className={`w-full py-2.5 px-4 rounded-lg text-center text-xs font-medium ${
-                statusMessage.type === 'success'
-                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                  : 'bg-rose-50 text-rose-700 border border-rose-200'
-              }`}
+              className={`w-full py-2.5 px-4 rounded-lg text-center text-xs font-medium ${statusMessage.type === 'success'
+                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                : 'bg-rose-50 text-rose-700 border border-rose-200'
+                }`}
             >
               {statusMessage.text}
             </div>
@@ -179,7 +178,7 @@ export default function GuestBookSection({ invitationId, guestName }) {
         {!isLoading && entries.length > 0 && (
           <div className="w-full mt-6 flex flex-col">
 
-            {/* Scrollable list container */}
+            {/* komentar Scrollable list container */}
             <div className="w-full flex flex-col gap-2.5 max-h-[360px] overflow-y-auto pr-1.5 diamora-guestbook-scroll">
               {entries.map((entry, idx) => (
                 <motion.div
@@ -215,7 +214,8 @@ export default function GuestBookSection({ invitationId, guestName }) {
         )}
       </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .diamora-guestbook-scroll::-webkit-scrollbar {
           width: 4px;
         }

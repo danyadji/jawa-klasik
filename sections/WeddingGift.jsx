@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import bgWeddingGift from '../assets/illustrations/BG-WEDDING-GIFT.png';
 
-export default function WeddingGift({ 
-  bankAccounts = [], 
-  giftAddress = '', 
+export default function WeddingGift({
+  bankAccounts = [],
+  giftAddress = '',
   events = [],
   groomName = 'Danu',
   brideName = 'Fifi'
@@ -23,9 +23,9 @@ export default function WeddingGift({
   const displayAccounts = (bankAccounts && bankAccounts.length > 0)
     ? bankAccounts
     : [
-        { bank: 'BCA', number: '1234567890', holder: `${groomName} & ${brideName}` },
-        { bank: 'MANDIRI', number: '0987654321', holder: `${brideName} & ${groomName}` }
-      ];
+      { bank: 'BCA', number: '1234567890', holder: `${groomName} & ${brideName}` },
+      { bank: 'MANDIRI', number: '0987654321', holder: `${brideName} & ${groomName}` }
+    ];
 
   // Address for sending physical gifts
   const targetAddress = giftAddress || events?.[0]?.address || events?.[0]?.location || 'Alamat Gedung / Kediaman Mempelai';
@@ -94,14 +94,14 @@ export default function WeddingGift({
                 <div className="w-8 h-8 rounded-full bg-[#6b492b]/15 flex items-center justify-center text-[#6b492b]">
                   <i className="fa-solid fa-credit-card text-sm"></i>
                 </div>
-                <h4 
+                <h4
                   className="text-base font-bold tracking-wider uppercase"
                   style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}
                 >
                   Amplop Digital
                 </h4>
               </div>
-              
+
               <p className="text-[11px] text-[#6b492b] mb-4 font-medium not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif' }}>
                 Silakan transfer tanda kasih ke nomor rekening berikut:
               </p>
@@ -111,7 +111,7 @@ export default function WeddingGift({
                   const key = `acc-${idx}`;
                   const isCopied = copiedKey === key;
                   return (
-                    <div 
+                    <div
                       key={idx}
                       className="bg-white/80 rounded-xl p-3.5 border border-[#dfdad0] text-left flex flex-col gap-1.5 shadow-sm"
                     >
@@ -131,11 +131,10 @@ export default function WeddingGift({
                         <button
                           type="button"
                           onClick={() => handleCopy(acc.number, key)}
-                          className={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all shadow-sm active:scale-95 cursor-pointer ${
-                            isCopied 
-                              ? 'bg-emerald-600 text-white' 
-                              : 'bg-[#6b492b] hover:bg-[#4d3a30] text-white'
-                          }`}
+                          className={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all shadow-sm active:scale-95 cursor-pointer ${isCopied
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-[#6b492b] hover:bg-[#4d3a30] text-white'
+                            }`}
                         >
                           <i className={`fa-solid ${isCopied ? 'fa-check' : 'fa-copy'}`}></i>
                           {isCopied ? 'Tersalin' : 'Salin'}
@@ -152,7 +151,7 @@ export default function WeddingGift({
                 <div className="w-8 h-8 rounded-full bg-[#6b492b]/15 flex items-center justify-center text-[#6b492b]">
                   <i className="fa-solid fa-box-open text-sm"></i>
                 </div>
-                <h4 
+                <h4
                   className="text-base font-bold tracking-wider uppercase"
                   style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}
                 >
@@ -179,11 +178,10 @@ export default function WeddingGift({
                   <button
                     type="button"
                     onClick={() => handleCopy(targetAddress, 'address')}
-                    className={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all shadow-sm active:scale-95 cursor-pointer ${
-                      copiedKey === 'address'
-                        ? 'bg-emerald-600 text-white'
-                        : 'bg-[#6b492b] hover:bg-[#4d3a30] text-white'
-                    }`}
+                    className={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all shadow-sm active:scale-95 cursor-pointer ${copiedKey === 'address'
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-[#6b492b] hover:bg-[#4d3a30] text-white'
+                      }`}
                   >
                     <i className={`fa-solid ${copiedKey === 'address' ? 'fa-check' : 'fa-copy'}`}></i>
                     {copiedKey === 'address' ? 'Alamat Tersalin' : 'Salin Alamat'}

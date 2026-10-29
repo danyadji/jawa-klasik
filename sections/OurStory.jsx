@@ -26,7 +26,7 @@ export default function OurStory({ stories: propStories }) {
     <section className="relative w-full flex flex-col items-center py-16 z-20 px-6 min-[400px]:px-10">
       {/* Background putih 80% dibatasi mulai dari judul Our Story ke bawah (tidak melebihi ke atas) */}
       <div className="absolute inset-x-0 bottom-0 top-[calc(4rem+18px)] min-[400px]:top-[calc(4rem+22px)] bg-white/80 pointer-events-none" />
-      
+
       <div className="relative z-10 w-full flex justify-center mb-10">
         <div className="absolute inset-y-1/2 left-0 right-0 h-[2px] bg-[#8c7457] opacity-20"></div>
         <div className="relative bg-white px-8 py-2 min-[400px]:py-3 rounded-[1rem] shadow-sm z-10">
@@ -38,13 +38,13 @@ export default function OurStory({ stories: propStories }) {
 
       <div className="relative z-10 flex flex-col gap-12 w-full mt-2">
         {stories.map((story, idx) => (
-          <motion.div 
+          <motion.div
             key={idx}
             {...fadeInUp}
             transition={{ delay: idx * 0.2 }}
             className="flex flex-col items-center text-center w-full"
           >
-            <div className="relative w-full max-w-[340px] aspect-[16/10] mb-6 rounded-2xl overflow-hidden shadow-md border-white bg-[#8c7457]/10 flex items-center justify-center">
+            <div className="relative w-full max-w-[340px] aspect-[16/10] mb-6 rounded-2xl overflow-hidden shadow-md  border-white bg-[#8c7457]/10 flex items-center justify-center">
               {story.photo ? (
                 <img src={story.photo} alt={story.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
               ) : (
@@ -57,7 +57,7 @@ export default function OurStory({ stories: propStories }) {
             <h4 className="text-3xl min-[400px]:text-5xl text-[#4d3a30] mb-4" style={{ fontFamily: 'Photograph Signature, cursive' }}>
               {story.title}
             </h4>
-            
+
             <p className="font-isi not-italic text-[#4d3a30] text-[16px] min-[375px]:text-[14px] min-[400px]:text-[15px] leading-relaxed w-full min-[400px]:w-[90%]" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
               {story.description}
             </p>
