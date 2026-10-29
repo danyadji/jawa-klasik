@@ -10,8 +10,8 @@ export default function QuoteSection({ quote }) {
 
   return (
     <section className="w-full flex justify-center py-6 px-3 min-[375px]:px-4 min-[400px]:px-6">
-      <div className="w-full max-w-[460px] text-center font-isi text-[#4d3a30] text-[14px] min-[375px]:text-[15px] min-[400px]:text-[16px] leading-[1.8]" style={{ fontFamily: 'Futura Bk BT, sans-serif' }}>
-        <p className="not-italic">
+      <div className="w-full max-w-[460px] text-center font-isi text-[#4d3a30] text-[13px] min-[375px]:text-[15px] min-[400px]:text-[16px] leading-[1.8]" style={{ fontFamily: 'Futura Bk BT, sans-serif' }}>
+        <p className="italic">
           {text}
         </p>
         {source && (
