@@ -77,15 +77,16 @@ export default function VideoSection({ videoUrl, onVideoPlay }) {
     }
   }
 
-  function handleTimeUpdate() {
-    if (!videoRef.current) return
-    setCurrentTime(videoRef.current.currentTime)
-  }
-
-  function handleLoadedMetadata() {
-    if (!videoRef.current) return
-    setDuration(videoRef.current.duration)
-  }
+  const syncProgress = useCallback(() => {
+    const video = videoRef.current
+    if (!video) return
+    const cur = video.currentTime || 0
+    setCurrentTime(cur)
+    const dur = video.duration
+    if (dur && !isNaN(dur) && isFinite(dur) && dur > 0) {
+      setDuration(dur)
+    }
+  }, [])
 
   function handleSeek(e) {
     e.stopPropagation()
@@ -106,7 +107,30 @@ export default function VideoSection({ videoUrl, onVideoPlay }) {
     return () => clearTimeout(hideControlsTimer.current)
   }, [])
 
-  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0
+  // Smooth 60fps tracking while video is actively playing
+  useEffect(() => {
+    let animId
+    if (isPlaying) {
+      const step = () => {
+        syncProgress()
+        animId = requestAnimationFrame(step)
+      }
+      animId = requestAnimationFrame(step)
+    }
+    return () => {
+      if (animId) cancelAnimationFrame(animId)
+    }
+  }, [isPlaying, syncProgress])
+
+  // Sync initial metadata if video already loaded in cache
+  useEffect(() => {
+    syncProgress()
+  }, [videoState, syncProgress])
+
+  const progressPercent =
+    duration > 0 && isFinite(duration)
+      ? Math.min(100, Math.max(0, (currentTime / duration) * 100))
+      : 0
   const isDrive = videoState.isDrive
   const isYoutube = videoState.isYoutube
   const driveEmbedUrl = isDrive
@@ -146,8 +170,15 @@ export default function VideoSection({ videoUrl, onVideoPlay }) {
             playsInline
             preload="metadata"
             onError={handleVideoError}
-            onTimeUpdate={handleTimeUpdate}
-            onLoadedMetadata={handleLoadedMetadata}
+            onTimeUpdate={syncProgress}
+            onLoadedMetadata={syncProgress}
+            onDurationChange={syncProgress}
+            onCanPlay={syncProgress}
+            onPlay={() => {
+              setIsPlaying(true)
+              syncProgress()
+            }}
+            onPause={() => setIsPlaying(false)}
             onEnded={() => {
               setIsPlaying(false)
               setShowControls(true)
@@ -191,33 +222,45 @@ export default function VideoSection({ videoUrl, onVideoPlay }) {
 
             <div
               onClick={(e) => e.stopPropagation()}
-              className={`absolute bottom-0 inset-x-0 px-4 pt-6 pb-4 z-10 bg-gradient-to-t from-black/85 via-black/40 to-transparent transition-opacity duration-300 ${
+              style={{ bottom: '140px' }}
+              className={`absolute inset-x-0 px-4 py-2 z-10 transition-opacity duration-300 ${
                 showControls || !isPlaying ? 'opacity-100' : 'opacity-0 pointer-events-none'
               }`}
             >
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-[11px] font-mono text-white/90 tracking-wider">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-mono text-white tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
                   {formatTime(currentTime)}
                 </span>
                 <div className="relative flex-1 flex items-center h-5">
-                  <div className="absolute inset-x-0 h-1 rounded-full bg-white/30 overflow-hidden">
+                  {/* Track background */}
+                  <div className="absolute inset-x-0 h-[3px] rounded-full bg-white/40 pointer-events-none">
+                    {/* Filled portion */}
                     <div
-                      className="h-full bg-gradient-to-r from-[#C89736] to-[#E3BD70] transition-all duration-75"
+                      className="h-full bg-gradient-to-r from-[#C89736] to-[#E3BD70] rounded-full"
                       style={{ width: `${progressPercent}%` }}
                     />
                   </div>
+                  {/* Thumb pointer */}
+                  <div
+                    className="absolute top-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_6px_rgba(0,0,0,0.6)] pointer-events-none"
+                    style={{
+                      left: `${progressPercent}%`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  />
+                  {/* Invisible range input for interaction */}
                   <input
                     type="range"
                     min={0}
-                    max={duration || 100}
-                    step={0.1}
+                    max={duration > 0 ? duration : 100}
+                    step={0.01}
                     value={currentTime}
                     onChange={handleSeek}
                     aria-label="Timeline video"
                     className="relative z-10 w-full h-5 opacity-0 cursor-pointer"
                   />
                 </div>
-                <span className="text-[11px] font-mono text-white/70 tracking-wider">
+                <span className="text-[11px] font-mono text-white/70 tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
                   {formatTime(duration)}
                 </span>
               </div>
