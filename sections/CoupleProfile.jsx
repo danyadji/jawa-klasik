@@ -34,6 +34,8 @@ function formatQuote(text) {
       const lastIdx = rawLines.lastIndexOf(last);
       body = rawLines.slice(0, lastIdx).join(' ').replace(/\s+/g, ' ').trim();
       source = last;
+    } else {
+      body = nonEmptyLines.join(' ').replace(/\s+/g, ' ').trim();
     }
   } else {
     const match = cleaned.match(/^(.*?)\s*(\((?:QS|Q\.S|Surat|HR|H\.R|Qur'?an|Hadits?)[\.:\w\s\d\-–—]+\))\s*$/is);
@@ -43,26 +45,12 @@ function formatQuote(text) {
     }
   }
 
-  // Khusus teks surat Ar-Rum 21, susun presisi menjadi 7 baris seimbang sesuai desain
-  if (/menciptakan pasangan-pasangan untukmu/i.test(body)) {
-    const lines7 = [
-      'Di antara tanda-tanda (kebesaran)-Nya ialah Dia',
-      'menciptakan pasangan-pasangan untukmu dari',
-      'jenismu sendiri agar kamu cenderung dan merasa',
-      'tenteram kepadanya, dan Dia menjadikan di antaramu',
-      'rasa kasih dan sayang. Sesungguhnya pada yang',
-      'demikian itu benar-benar terdapat tanda-tanda',
-      '(kebesaran Allah) bagi kaum yang berpikir.'
-    ];
-    return {
-      body: lines7.join('\n'),
-      source: source || '(QS. Ar-Rum: 21)',
-    };
-  }
+  // Bersihkan newline berlebih agar teks mengalir seimbang di segala ukuran layar HP
+  body = body.replace(/\s+/g, ' ').trim();
 
   return {
     body,
-    source,
+    source: source || '(QS. Ar-Rum: 21)',
   };
 }
 
@@ -90,16 +78,19 @@ export default function CoupleProfile({ groom, bride, quote }) {
               className="w-16 min-[400px]:w-20 h-auto -mt-10 min-[400px]:-mt-12 mb-1 min-[400px]:mb-8 drop-shadow-sm"
             />
 
-            <motion.div {...fadeInUp} className="text-center mt-6 mb-4 min-[400px]:mb-6 relative w-full max-w-[460px] mx-auto px-1 min-[375px]:px-2">
-              <div className="font-isi not-italic text-[#4d3a30] text-[14px] min-[375px]:text-[15px] min-[400px]:text-[16px] leading-[1.8] mb-4 min-[400px]:mb-6" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
+            <motion.div {...fadeInUp} className="text-center mt-6 mb-4 min-[400px]:mb-6 relative w-full max-w-[460px] mx-auto px-2 min-[375px]:px-4">
+              <div
+                className="font-isi text-[#4d3a30] text-[12.5px] min-[360px]:text-[13.5px] min-[400px]:text-[15px] leading-[1.8] mb-4 min-[400px]:mb-6 px-1"
+                style={{ fontFamily: 'Futura Bk BT, sans-serif', textWrap: 'balance' }}
+              >
                 {quote ? (
                   (() => {
                     const parsed = formatQuote(quote);
                     return (
                       <>
-                        <span className="block whitespace-pre-line not-italic">{parsed.body}</span>
+                        <span className="block italic leading-[1.8]">{parsed.body}</span>
                         {parsed.source && (
-                          <span className="mt-3 min-[400px]:mt-4 block not-italic opacity-95 text-[12px] min-[375px]:text-[13px] min-[400px]:text-[14px]">
+                          <span className="mt-3 min-[400px]:mt-4 block not-italic opacity-95 text-[11.5px] min-[375px]:text-[12.5px] min-[400px]:text-[13.5px] font-medium">
                             {parsed.source}
                           </span>
                         )}
@@ -108,10 +99,10 @@ export default function CoupleProfile({ groom, bride, quote }) {
                   })()
                 ) : (
                   <>
-                    <span className="block not-italic">
+                    <span className="block italic leading-[1.8]">
                       Di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.
                     </span>
-                    <span className="mt-3 min-[400px]:mt-4 block not-italic opacity-95 text-[12px] min-[375px]:text-[13px] min-[400px]:text-[14px]">
+                    <span className="mt-3 min-[400px]:mt-4 block not-italic opacity-95 text-[11.5px] min-[375px]:text-[12.5px] min-[400px]:text-[13.5px] font-medium">
                       (QS. Ar-Rum: 21)
                     </span>
                   </>
