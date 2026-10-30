@@ -49,7 +49,7 @@ export default function ClosingSection({ groomNickname, brideNickname, photo }) 
         <motion.p
           {...fadeInUp}
           transition={{ delay: 0.2 }}
-          className="text-[#4d3a30] text-[11px] min-[400px]:text-[13px] text-center leading-relaxed px-10 min-[400px]:px-14 mt-8 mb-8"
+          className="text-[#4d3a30] text-[13px] min-[400px]:text-[14px] text-center leading-relaxed px-10 min-[400px]:px-14 mt-8 mb-8"
           style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}
         >
           Merupakan kebahagiaan tersendiri bagi kami apabila Bapak/Ibu/Saudara/i

@@ -271,3 +271,20 @@ async function mapAcfToInvitation(post) {
     dresscodeInfo,
   };
 }
+
+export async function checkGuestRegistration(slugOrId, guestName) {
+  if (!guestName || !guestName.trim()) {
+    return { registered: false };
+  }
+  const isId = typeof slugOrId === 'number';
+  const param = isId ? `undangan_id=${slugOrId}` : `slug=${encodeURIComponent(slugOrId)}`;
+
+  const res = await fetch(
+    `${DIAMORA_API_BASE}/guests/check?${param}&nama=${encodeURIComponent(guestName.trim())}`
+  );
+  if (!res.ok) {
+    throw new Error(`HTTP error ${res.status}`);
+  }
+  const data = await res.json();
+  return data;
+}

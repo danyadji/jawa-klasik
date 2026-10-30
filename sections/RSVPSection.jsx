@@ -5,7 +5,7 @@ import { submitRsvp } from '../../../shared/wp-api';
 import kupu2 from '../assets/illustrations/kupu-2.webp';
 import catMerged from '../assets/illustrations/kucing-rsvp.webp';
 
-export default function RSVPSection({ invitationId, guestName }) {
+export default function RSVPSection({ invitationId, guestName, isRegisteredGuest = false }) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -13,13 +13,19 @@ export default function RSVPSection({ invitationId, guestName }) {
     transition: { duration: 0.8, ease: "easeOut" }
   };
 
-  const initialName = guestName && guestName !== 'Tamu Undangan' ? guestName : '';
+  const initialName = isRegisteredGuest && guestName && guestName !== 'Tamu' && guestName !== 'Tamu Undangan' ? guestName : '';
   const [name, setName] = useState(initialName);
   const [kehadiran, setKehadiran] = useState('Hadir');
   const [jumlah, setJumlah] = useState('1');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  React.useEffect(() => {
+    if (isRegisteredGuest && guestName) {
+      setName(guestName);
+    }
+  }, [isRegisteredGuest, guestName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -102,15 +108,27 @@ export default function RSVPSection({ invitationId, guestName }) {
               </div>
             )}
 
+            {!isRegisteredGuest && (
+              <div className="bg-white/15 border border-white/25 text-white/95 px-4 py-3 rounded-lg text-xs text-center font-medium">
+                Mohon maaf! Konfirmasi kehadiran khusus untuk tamu undangan.
+              </div>
+            )}
+
             <div className="flex flex-col">
               <label className="text-white text-[11px] min-[375px]:text-[13px] mb-1.5 ml-1">Nama *</label>
               <input
                 type="text"
-                value={name}
+                value={isRegisteredGuest ? name : ''}
+                readOnly={isRegisteredGuest}
+                disabled={!isRegisteredGuest}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Nama lengkap Anda"
-                required
-                className="w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm focus:outline-none focus:ring-2 focus:ring-[#9c7247]"
+                placeholder={isRegisteredGuest ? 'Nama lengkap Anda' : 'Nama Kamu'}
+                required={isRegisteredGuest}
+                className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm focus:outline-none ${
+                  !isRegisteredGuest
+                    ? 'bg-white/70 cursor-not-allowed opacity-75 placeholder-gray-500'
+                    : 'bg-white font-medium focus:ring-2 focus:ring-[#9c7247]'
+                }`}
               />
             </div>
 
@@ -119,8 +137,13 @@ export default function RSVPSection({ invitationId, guestName }) {
               <div className="relative">
                 <select
                   value={kehadiran}
+                  disabled={!isRegisteredGuest}
                   onChange={(e) => setKehadiran(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#9c7247]"
+                  className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none ${
+                    !isRegisteredGuest
+                      ? 'bg-white/70 cursor-not-allowed opacity-75'
+                      : 'bg-white focus:ring-2 focus:ring-[#9c7247]'
+                  }`}
                 >
                   <option value="Hadir">Hadir</option>
                   <option value="Tidak Hadir">Tidak Hadir</option>
@@ -139,8 +162,13 @@ export default function RSVPSection({ invitationId, guestName }) {
                 <div className="relative">
                   <select
                     value={jumlah}
+                    disabled={!isRegisteredGuest}
                     onChange={(e) => setJumlah(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#9c7247]"
+                    className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none ${
+                      !isRegisteredGuest
+                        ? 'bg-white/70 cursor-not-allowed opacity-75'
+                        : 'bg-white focus:ring-2 focus:ring-[#9c7247]'
+                    }`}
                   >
                     <option value="1">1 Orang</option>
                     <option value="2">2 Orang</option>
@@ -157,11 +185,15 @@ export default function RSVPSection({ invitationId, guestName }) {
             )}
 
             <motion.button
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
+              whileHover={isRegisteredGuest ? { scale: 1.01 } : {}}
+              whileTap={isRegisteredGuest ? { scale: 0.99 } : {}}
               type="submit"
-              disabled={isSubmitting}
-              className="w-full mt-2 bg-white text-[#6b492b] hover:bg-[#fbf7f2] font-semibold py-3 px-6 rounded-lg tracking-widest uppercase text-xs transition shadow-md disabled:opacity-60 flex items-center justify-center gap-2"
+              disabled={!isRegisteredGuest || isSubmitting}
+              className={`w-full mt-2 font-semibold py-3 px-6 rounded-lg tracking-widest uppercase text-xs transition shadow-md flex items-center justify-center gap-2 ${
+                !isRegisteredGuest
+                  ? 'bg-white/50 text-[#6b492b]/60 opacity-60 cursor-not-allowed'
+                  : 'bg-white text-[#6b492b] hover:bg-[#fbf7f2] disabled:opacity-60 cursor-pointer'
+              }`}
             >
               {isSubmitting ? (
                 <span>Mengirim...</span>

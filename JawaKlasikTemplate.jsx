@@ -40,7 +40,7 @@ function prefetchPostCover() {
   import('./components/BottomNavbar');
 }
 
-export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Undangan' }) {
+export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Undangan', isRegisteredGuest = false }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const scrollContainerRef = useRef(null);
@@ -151,6 +151,7 @@ export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Un
                 <RSVPSection
                   invitationId={data.id}
                   guestName={guestName}
+                  isRegisteredGuest={isRegisteredGuest}
                 />
               </div>
             
@@ -170,6 +171,7 @@ export default function JawaKlasikTemplate({ data: rawData, guestName = 'Tamu Un
                 <GuestBookSection
                   invitationId={data.id}
                   guestName={guestName}
+                  isRegisteredGuest={isRegisteredGuest}
                 />
               </div>
               

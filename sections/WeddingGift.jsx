@@ -60,7 +60,7 @@ export default function WeddingGift({
           <motion.p
             {...fadeInUp}
             transition={{ delay: 0.2 }}
-            className="text-[#4d3a30] text-[11px] min-[375px]:text-[13px] font-medium leading-relaxed mb-8 max-w-[90%] mx-auto"
+            className="text-[#4d3a30] text-[13px] min-[375px]:text-[14px] font-medium leading-relaxed mb-8 max-w-[90%] mx-auto"
             style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
           >
             Restu dan langkah Anda yang hadir adalah hadiah paling indah. Bila ingin menitipkan tanda kasih, kami dengan penuh syukur menerima melalui informasi berikut:

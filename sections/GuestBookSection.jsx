@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { fetchUcapan, submitUcapan } from '../../../shared/wp-api';
 
-export default function GuestBookSection({ invitationId, guestName }) {
+export default function GuestBookSection({ invitationId, guestName, isRegisteredGuest = false }) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -10,13 +10,19 @@ export default function GuestBookSection({ invitationId, guestName }) {
     transition: { duration: 0.8, ease: 'easeOut' }
   };
 
-  const initialName = guestName && guestName !== 'Tamu Undangan' ? guestName : '';
+  const initialName = isRegisteredGuest && guestName && guestName !== 'Tamu' && guestName !== 'Tamu Undangan' ? guestName : '';
   const [entries, setEntries] = useState([]);
   const [name, setName] = useState(initialName);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState(null);
+
+  useEffect(() => {
+    if (isRegisteredGuest && guestName) {
+      setName(guestName);
+    }
+  }, [isRegisteredGuest, guestName]);
 
   useEffect(() => {
     if (!invitationId) return;
@@ -119,6 +125,12 @@ export default function GuestBookSection({ invitationId, guestName }) {
             </div>
           )}
 
+          {!isRegisteredGuest && (
+            <div className="w-full py-2.5 px-4 rounded-lg text-center text-xs font-medium bg-[#fdf2f2] text-[#9b1c1c] border border-[#f8b4b4]">
+              Mohon maaf! Khusus untuk tamu undangan.
+            </div>
+          )}
+
           <div className="flex flex-col gap-1 text-left">
             <label
               className="text-[#4d3a30] text-[11px] min-[400px]:text-[12px] font-semibold"
@@ -128,11 +140,17 @@ export default function GuestBookSection({ invitationId, guestName }) {
             </label>
             <input
               type="text"
-              value={name}
+              value={isRegisteredGuest ? name : ''}
+              readOnly={isRegisteredGuest}
+              disabled={!isRegisteredGuest}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Contoh: Danu & Partner"
-              required
-              className="w-full bg-white rounded-lg px-4 py-2.5 text-[#4d3a30] text-[12px] outline-none focus:ring-2 focus:ring-[#6b492b] shadow-sm placeholder-gray-400"
+              placeholder={isRegisteredGuest ? 'Nama Anda' : 'Nama Kamu'}
+              required={isRegisteredGuest}
+              className={`w-full rounded-lg px-4 py-2.5 text-[#4d3a30] text-[12px] outline-none shadow-sm ${
+                !isRegisteredGuest
+                  ? 'bg-gray-100/80 cursor-not-allowed opacity-75 placeholder-gray-400'
+                  : 'bg-gray-50/90 cursor-default font-medium'
+              }`}
               style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
             />
           </div>
@@ -146,21 +164,34 @@ export default function GuestBookSection({ invitationId, guestName }) {
             </label>
             <textarea
               rows={3}
-              value={message}
+              value={isRegisteredGuest ? message : ''}
+              disabled={!isRegisteredGuest}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Tulis ucapan dan doa restu untuk kedua mempelai..."
-              required
-              className="w-full bg-white rounded-lg px-4 py-2.5 text-[#4d3a30] text-[12px] outline-none focus:ring-2 focus:ring-[#6b492b] shadow-sm resize-none placeholder-gray-400"
+              placeholder={
+                isRegisteredGuest
+                  ? 'Tulis ucapan dan doa restu untuk kedua mempelai...'
+                  : 'Komentar hanya dapat dikirim oleh tamu terdaftar.'
+              }
+              required={isRegisteredGuest}
+              className={`w-full rounded-lg px-4 py-2.5 text-[#4d3a30] text-[12px] outline-none shadow-sm resize-none ${
+                !isRegisteredGuest
+                  ? 'bg-gray-100/80 cursor-not-allowed opacity-75 placeholder-gray-400'
+                  : 'bg-white focus:ring-2 focus:ring-[#6b492b] placeholder-gray-400'
+              }`}
               style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
             />
           </div>
 
           <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={isRegisteredGuest ? { scale: 1.02 } : {}}
+            whileTap={isRegisteredGuest ? { scale: 0.98 } : {}}
             type="submit"
-            disabled={isSubmitting}
-            className="w-48 mx-auto bg-[#6b492b] hover:bg-[#4d3a30] text-white tracking-[0.25em] uppercase py-2.5 rounded-lg text-[11px] font-semibold transition-colors mt-1 shadow-md disabled:opacity-60 cursor-pointer"
+            disabled={!isRegisteredGuest || isSubmitting}
+            className={`w-48 mx-auto text-white tracking-[0.25em] uppercase py-2.5 rounded-lg text-[11px] font-semibold transition-colors mt-1 shadow-md ${
+              !isRegisteredGuest
+                ? 'bg-gray-400 opacity-60 cursor-not-allowed'
+                : 'bg-[#6b492b] hover:bg-[#4d3a30] disabled:opacity-60 cursor-pointer'
+            }`}
             style={{ fontFamily: 'Futura Bk BT, sans-serif' }}
           >
             {isSubmitting ? 'Mengirim...' : 'Kirim Ucapan'}
