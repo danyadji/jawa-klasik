@@ -158,7 +158,7 @@ export default function CountdownTimer({
         <h3 className="text-xl font-bold min-[400px]:text-2xl text-[#4d3a30] mb-3 tracking-widest uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
           Dress Code
         </h3>
-        <p className="font-isi not-italic text-[#4d3a30] text-[12px] min-[375px]:text-[13px] min-[400px]:text-[14px] leading-relaxed mb-6" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
+        <p className="font-isi not-italic text-[#4d3a30] text-[14px] min-[375px]:text-[15.5px] min-[400px]:text-[16.5px] leading-relaxed mb-6" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
           {infoText}
         </p>
 
@@ -178,7 +178,7 @@ export default function CountdownTimer({
         transition={{ delay: 0.2 }}
         className="flex flex-col items-center w-full mt-6"
       >
-        <h3 className="text-sm font-bold min-[400px]:text-base text-[#4d3a30] mb-6 tracking-widest uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
+        <h3 className="text-lg font-bold min-[400px]:text-base text-[#4d3a30] mb-6 tracking-normal uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
           Counting Down To The Day
         </h3>
 

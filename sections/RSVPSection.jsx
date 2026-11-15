@@ -72,11 +72,11 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
           className="absolute -top-6 -left-6 w-12 min-[400px]:w-14 h-auto drop-shadow-sm pointer-events-none"
         />
 
-        <h3 className="text-2xl font-bold min-[400px]:text-3xl text-white text-center mb-4 tracking-widest not-italic" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
+        <h3 className="text-2xl font-bold min-[400px]:text-3xl text-white text-center mb-4 tracking-normal not-italic" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
           RSVP
         </h3>
 
-        <p className="text-white text-center text-[10px] min-[375px]:text-[14px] leading-relaxed mb-6 not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
+        <p className="text-white text-center text-[12px] min-[375px]:text-[14px] leading-relaxed mb-6 not-italic" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
           Di hari yang penuh makna ini, kehadiran serta doa restu Bapak/Ibu/Saudara/i akan menjadi bagian indah dari perjalanan baru kami. Terima kasih atas segala doa dan kasih yang diberikan.
         </p>
 
@@ -115,7 +115,7 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
             )}
 
             <div className="flex flex-col">
-              <label className="text-white text-[11px] min-[375px]:text-[13px] mb-1.5 ml-1">Nama *</label>
+              <label className="text-white text-[12px] min-[375px]:text-[14px] mb-1.5 ml-1">Nama *</label>
               <input
                 type="text"
                 value={isRegisteredGuest ? name : ''}
@@ -124,26 +124,24 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
                 onChange={(e) => setName(e.target.value)}
                 placeholder={isRegisteredGuest ? 'Nama lengkap Anda' : 'Nama Kamu'}
                 required={isRegisteredGuest}
-                className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm focus:outline-none ${
-                  !isRegisteredGuest
+                className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm focus:outline-none ${!isRegisteredGuest
                     ? 'bg-white/70 cursor-not-allowed opacity-75 placeholder-gray-500'
                     : 'bg-white font-medium focus:ring-2 focus:ring-[#9c7247]'
-                }`}
+                  }`}
               />
             </div>
 
             <div className="flex flex-col">
-              <label className="text-white text-[11px] min-[375px]:text-[13px] mb-1.5 ml-1">Konfirmasi kehadiran *</label>
+              <label className="text-white text-[12px] min-[375px]:text-[14px] mb-1.5 ml-1">Konfirmasi kehadiran *</label>
               <div className="relative">
                 <select
                   value={kehadiran}
                   disabled={!isRegisteredGuest}
                   onChange={(e) => setKehadiran(e.target.value)}
-                  className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none ${
-                    !isRegisteredGuest
+                  className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none ${!isRegisteredGuest
                       ? 'bg-white/70 cursor-not-allowed opacity-75'
                       : 'bg-white focus:ring-2 focus:ring-[#9c7247]'
-                  }`}
+                    }`}
                 >
                   <option value="Hadir">Hadir</option>
                   <option value="Tidak Hadir">Tidak Hadir</option>
@@ -158,17 +156,16 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
 
             {kehadiran === 'Hadir' && (
               <div className="flex flex-col">
-                <label className="text-white text-[11px] min-[375px]:text-[13px] mb-1.5 ml-1">Jumlah pengunjung *</label>
+                <label className="text-white text-[12px] min-[375px]:text-[14px] mb-1.5 ml-1">Jumlah pengunjung *</label>
                 <div className="relative">
                   <select
                     value={jumlah}
                     disabled={!isRegisteredGuest}
                     onChange={(e) => setJumlah(e.target.value)}
-                    className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none ${
-                      !isRegisteredGuest
+                    className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none ${!isRegisteredGuest
                         ? 'bg-white/70 cursor-not-allowed opacity-75'
                         : 'bg-white focus:ring-2 focus:ring-[#9c7247]'
-                    }`}
+                      }`}
                   >
                     <option value="1">1 Orang</option>
                     <option value="2">2 Orang</option>
@@ -189,11 +186,10 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
               whileTap={isRegisteredGuest ? { scale: 0.99 } : {}}
               type="submit"
               disabled={!isRegisteredGuest || isSubmitting}
-              className={`w-full mt-2 font-semibold py-3 px-6 rounded-lg tracking-widest uppercase text-xs transition shadow-md flex items-center justify-center gap-2 ${
-                !isRegisteredGuest
+              className={`w-full mt-2 font-semibold py-3 px-6 rounded-lg tracking-widest uppercase text-xs transition shadow-md flex items-center justify-center gap-2 ${!isRegisteredGuest
                   ? 'bg-white/50 text-[#6b492b]/60 opacity-60 cursor-not-allowed'
                   : 'bg-white text-[#6b492b] hover:bg-[#fbf7f2] disabled:opacity-60 cursor-pointer'
-              }`}
+                }`}
             >
               {isSubmitting ? (
                 <span>Mengirim...</span>
