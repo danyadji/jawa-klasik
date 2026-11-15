@@ -69,7 +69,7 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
         <img
           src={kupu2}
           alt="Butterfly"
-          className="absolute -top-6 -left-6 w-12 min-[400px]:w-14 h-auto drop-shadow-sm pointer-events-none"
+          className="absolute -top-6 -left-2 w-12 min-[400px]:w-14 h-auto drop-shadow-sm pointer-events-none"
         />
 
         <h3 className="text-2xl font-bold min-[400px]:text-3xl text-white text-center mb-4 tracking-normal not-italic" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
@@ -125,8 +125,8 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
                 placeholder={isRegisteredGuest ? 'Nama lengkap Anda' : 'Nama Kamu'}
                 required={isRegisteredGuest}
                 className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm focus:outline-none ${!isRegisteredGuest
-                    ? 'bg-white/70 cursor-not-allowed opacity-75 placeholder-gray-500'
-                    : 'bg-white font-medium focus:ring-2 focus:ring-[#9c7247]'
+                  ? 'bg-white/70 cursor-not-allowed opacity-75 placeholder-gray-500'
+                  : 'bg-white font-medium focus:ring-2 focus:ring-[#9c7247]'
                   }`}
               />
             </div>
@@ -139,8 +139,8 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
                   disabled={!isRegisteredGuest}
                   onChange={(e) => setKehadiran(e.target.value)}
                   className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none ${!isRegisteredGuest
-                      ? 'bg-white/70 cursor-not-allowed opacity-75'
-                      : 'bg-white focus:ring-2 focus:ring-[#9c7247]'
+                    ? 'bg-white/70 cursor-not-allowed opacity-75'
+                    : 'bg-white focus:ring-2 focus:ring-[#9c7247]'
                     }`}
                 >
                   <option value="Hadir">Hadir</option>
@@ -163,8 +163,8 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
                     disabled={!isRegisteredGuest}
                     onChange={(e) => setJumlah(e.target.value)}
                     className={`w-full px-4 py-3 rounded-lg text-[#4d3a30] text-sm appearance-none focus:outline-none ${!isRegisteredGuest
-                        ? 'bg-white/70 cursor-not-allowed opacity-75'
-                        : 'bg-white focus:ring-2 focus:ring-[#9c7247]'
+                      ? 'bg-white/70 cursor-not-allowed opacity-75'
+                      : 'bg-white focus:ring-2 focus:ring-[#9c7247]'
                       }`}
                   >
                     <option value="1">1 Orang</option>
@@ -187,8 +187,8 @@ export default function RSVPSection({ invitationId, guestName, isRegisteredGuest
               type="submit"
               disabled={!isRegisteredGuest || isSubmitting}
               className={`w-full mt-2 font-semibold py-3 px-6 rounded-lg tracking-widest uppercase text-xs transition shadow-md flex items-center justify-center gap-2 ${!isRegisteredGuest
-                  ? 'bg-white/50 text-[#6b492b]/60 opacity-60 cursor-not-allowed'
-                  : 'bg-white text-[#6b492b] hover:bg-[#fbf7f2] disabled:opacity-60 cursor-pointer'
+                ? 'bg-white/50 text-[#6b492b]/60 opacity-60 cursor-not-allowed'
+                : 'bg-white text-[#6b492b] hover:bg-[#fbf7f2] disabled:opacity-60 cursor-pointer'
                 }`}
             >
               {isSubmitting ? (
