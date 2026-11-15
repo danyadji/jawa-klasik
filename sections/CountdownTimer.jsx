@@ -153,9 +153,9 @@ export default function CountdownTimer({
     <section className="relative w-full flex flex-col items-center py-16 z-20 px-6 min-[400px]:px-10">
       <motion.div
         {...fadeInUp}
-        className="w-full bg-white rounded-xl p-6 min-[400px]:p-8 flex flex-col items-center text-center shadow-md relative mb-16"
+        className="w-full bg-white/80 rounded-xl p-6 min-[400px]:p-8 flex flex-col items-center text-center shadow-md relative mb-16"
       >
-        <h3 className="text-xl font-bold min-[400px]:text-2xl text-[#4d3a30] mb-3 tracking-widest uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
+        <h3 className="text-xl font-bold min-[400px]:text-2xl text-[#4d3a30] mb-3 tracking-normal uppercase" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}>
           Dress Code
         </h3>
         <p className="font-isi not-italic text-[#4d3a30] text-[14px] min-[375px]:text-[15.5px] min-[400px]:text-[16.5px] leading-relaxed mb-6" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
