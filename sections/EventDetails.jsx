@@ -100,15 +100,15 @@ export default function EventDetails({ events }) {
                 transition={{ delay: idx * 0.2 }}
                 className="flex flex-col items-center text-center w-full"
               >
-                <h3 className="text-4xl min-[400px]:text-5xl text-[#7c8363] mb-3" style={{ fontFamily: 'Great Vibes, cursive' }}>
+                <h3 className="text-4xl not-italic min-[400px]:text-5xl text-[#7c8363] mb-3" style={{ fontFamily: 'Great Vibes, cursive' }}>
                   {event.title}
                 </h3>
 
-                <div className="font-isi not-italic text-[#4d3a30] text-[13px] min-[375px]:text-[14px] min-[400px]:text-[18px] leading-tight mb-3" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
+                <div className="font-isi not-italic text-[#4d3a30] text-[13px] min-[375px]:text-[16px] min-[400px]:text-[18px] leading-tight mb-3" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
                   {event.date ? <p className="font-bold not-italic" style={{ fontStyle: 'normal', fontWeight: 700, WebkitTextStroke: '0.45px currentColor' }}>{event.date}</p> : null}
                   {event.time ? <p className="font-bold not-italic" style={{ fontStyle: 'normal', fontWeight: 700, WebkitTextStroke: '0.45px currentColor' }}>{event.time}</p> : null}
                   {event.location ? <p className="font-bold not-italic" style={{ fontStyle: 'normal', fontWeight: 700, WebkitTextStroke: '0.45px currentColor' }}>{event.location}</p> : null}
-                  {event.address ? <p className="font-medium opacity-90 text-[11px] min-[375px]:text-[12px] min-[400px]:text-[12.5px] leading-snug max-w-[220px] mx-auto mt-2 not-italic" style={{ fontStyle: 'normal', fontWeight: 500, WebkitTextStroke: '0.2px currentColor' }}>{event.address}</p> : null}
+                  {event.address ? <p className="font-medium opacity-90 text-[11px] min-[375px]:text-[14px] min-[400px]:text-[12.5px] leading-snug max-w-[220px] mx-auto mt-2 not-italic" style={{ fontStyle: 'normal', fontWeight: 500, WebkitTextStroke: '0.2px currentColor' }}>{event.address}</p> : null}
                 </div>
 
                 <a
