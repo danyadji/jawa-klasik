@@ -46,7 +46,7 @@ export default function CoverSection({ guestName, groomNickname, brideNickname, 
 
         <div className="relative z-30 flex flex-col items-center justify-center flex-1 w-full pt-10 px-4 min-[400px]:px-6">
           <p
-            className="font-label text-[12px] min-[375px]:text-[16px] tracking-[0.3em] min-[400px]:tracking-[0.4em] uppercase text-[#6b492b] mb-4 font-medium"
+            className="w-[128px] h-[18px] text-[16px] font-normal uppercase text-[#6b492b] mb-4 text-center leading-none tracking-normal flex items-center justify-center"
             style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif' }}
           >
             THE WEDDING OF

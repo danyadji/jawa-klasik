@@ -18,16 +18,19 @@ export function getInvitation(slug) {
   return promise;
 }
 
-export function getGuest(slug, to) {
+export function getGuest(slug, kode) {
   const targetSlug = slug || 'danu-fifi';
-  const cleanTo = (to || '').trim();
-  const key = `${targetSlug}|${cleanTo}`;
+  const cleanKode = (kode || '').trim();
+  if (!cleanKode) {
+    return Promise.resolve({ registered: false, reason: 'tanpa_kode' });
+  }
+  const key = `${targetSlug}|${cleanKode}`;
 
   if (guestPromises.has(key)) {
     return guestPromises.get(key);
   }
 
-  const promise = checkGuestRegistration(targetSlug, cleanTo).catch((err) => {
+  const promise = checkGuestRegistration(targetSlug, cleanKode).catch((err) => {
     guestPromises.delete(key);
     throw err;
   });
@@ -44,10 +47,10 @@ export function startPrefetch() {
   const slug = segments[0] || 'danu-fifi';
 
   const searchParams = new URLSearchParams(window.location.search);
-  const to = (searchParams.get('to') || '').trim();
+  const k = (searchParams.get('k') || '').trim();
 
   getInvitation(slug);
-  if (to) {
-    getGuest(slug, to);
+  if (k) {
+    getGuest(slug, k);
   }
 }

@@ -272,15 +272,15 @@ async function mapAcfToInvitation(post) {
   };
 }
 
-export async function checkGuestRegistration(slugOrId, guestName) {
-  if (!guestName || !guestName.trim()) {
-    return { registered: false };
+export async function checkGuestRegistration(slugOrId, kode) {
+  if (!kode || !kode.trim()) {
+    return { registered: false, reason: 'tanpa_kode' };
   }
   const isId = typeof slugOrId === 'number';
   const param = isId ? `undangan_id=${slugOrId}` : `slug=${encodeURIComponent(slugOrId)}`;
 
   const res = await fetch(
-    `${DIAMORA_API_BASE}/guests/check?${param}&nama=${encodeURIComponent(guestName.trim())}`
+    `${DIAMORA_API_BASE}/guests/check?${param}&k=${encodeURIComponent(kode.trim())}`
   );
   if (!res.ok) {
     throw new Error(`HTTP error ${res.status}`);

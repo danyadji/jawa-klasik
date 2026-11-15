@@ -14,10 +14,19 @@ function LoadingSpinner({ message = 'Memuat Undangan...' }) {
   );
 }
 
+/**
+ * Pengaturan mode sapaan untuk tamu tidak dikenal (tanpa kode 'k' atau kode tidak valid):
+ * - 'general' (default): tampilkan sapaan umum "Bapak/Ibu/Saudara/i", RSVP nonaktif.
+ * - 'fallback_to_param': tampilkan nama dari query parameter ?to=..., RSVP nonaktif.
+ */
+const UNRECOGNIZED_GUEST_MODE = 'general';
+const GENERAL_GREETING = 'Bapak/Ibu/Saudara/i';
+
 function UndanganPage() {
   const { slug } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const toParam = (searchParams.get('to') || '').trim();
+  const kParam = (searchParams.get('k') || '').trim();
   const targetSlug = slug || 'danu-fifi';
 
   const [invitation, setInvitation] = useState(null);
@@ -43,11 +52,11 @@ function UndanganPage() {
     };
   }, [targetSlug]);
 
-  const guestKey = `${targetSlug}|${toParam}`;
-  const guestResult = toParam ? guestResults[guestKey] : null;
+  const guestKey = `${targetSlug}|${kParam}`;
+  const guestResult = kParam ? guestResults[guestKey] : null;
 
   let guestStatus = 'none';
-  if (toParam) {
+  if (kParam) {
     if (!guestResult) {
       guestStatus = 'checking';
     } else {
@@ -56,11 +65,11 @@ function UndanganPage() {
   }
 
   useEffect(() => {
-    if (!toParam) return;
+    if (!kParam) return;
     if (guestResults[guestKey]) return;
 
     let cancelled = false;
-    getGuest(targetSlug, toParam)
+    getGuest(targetSlug, kParam)
       .then((res) => {
         if (cancelled) return;
         if (res?.registered && res.guest?.nama) {
@@ -69,9 +78,10 @@ function UndanganPage() {
             [guestKey]: { status: 'ok', guest: res.guest },
           }));
         } else {
+          // Kode tidak dikenal atau link tidak valid: jangan tampilkan notfound screen, fallback umum
           setGuestResults((prev) => ({
             ...prev,
-            [guestKey]: { status: 'notfound' },
+            [guestKey]: { status: 'unrecognized' },
           }));
         }
       })
@@ -79,23 +89,14 @@ function UndanganPage() {
         if (cancelled) return;
         setGuestResults((prev) => ({
           ...prev,
-          [guestKey]: { status: 'error', error: err },
+          [guestKey]: { status: 'unrecognized', error: err },
         }));
       });
 
     return () => {
       cancelled = true;
     };
-  }, [targetSlug, toParam, guestKey, guestResults]);
-
-  const handleRetryGuest = () => {
-    setGuestResults((prev) => {
-      const next = { ...prev };
-      delete next[guestKey];
-      return next;
-    });
-    getGuest(targetSlug, toParam).catch(() => {});
-  };
+  }, [targetSlug, kParam, guestKey, guestResults]);
 
   if (!invitation || guestStatus === 'checking') {
     return (
@@ -105,40 +106,16 @@ function UndanganPage() {
     );
   }
 
-  if (guestStatus === 'error') {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-[#faf8f5] text-stone-700 px-6 text-center font-sans">
-        <div className="w-12 h-12 rounded-full bg-amber-100 text-[#6b492b] flex items-center justify-center mb-4 text-xl font-bold">
-          !
-        </div>
-        <h2 className="text-lg font-serif font-semibold mb-2">Gagal Memverifikasi Nama Tamu</h2>
-        <p className="text-xs text-stone-500 max-w-sm mb-6 leading-relaxed">
-          Terjadi kendala jaringan saat memeriksa data undangan Anda. Silakan coba kembali.
-        </p>
-        <button
-          onClick={handleRetryGuest}
-          className="px-6 py-2.5 bg-[#6b492b] text-white rounded-full text-xs uppercase tracking-wider font-medium hover:bg-[#543820] transition-colors"
-        >
-          Coba Lagi
-        </button>
-      </div>
-    );
-  }
-
-  if (guestStatus === 'notfound') {
-    return (
-      <GuestNotFoundScreen
-        onOpenAsGeneral={() => {
-          const next = new URLSearchParams(searchParams);
-          next.delete('to');
-          setSearchParams(next, { replace: true });
-        }}
-      />
-    );
-  }
-
   const isRegisteredGuest = guestStatus === 'ok';
-  const guestName = isRegisteredGuest ? (guestResult?.guest?.nama || 'Tamu') : 'Tamu';
+  let guestName = GENERAL_GREETING;
+  if (isRegisteredGuest) {
+    // Nama diambil dari database, BUKAN dari URL parameter ?to=
+    guestName = guestResult?.guest?.nama || GENERAL_GREETING;
+  } else if (UNRECOGNIZED_GUEST_MODE === 'fallback_to_param' && toParam) {
+    guestName = toParam;
+  } else {
+    guestName = GENERAL_GREETING;
+  }
 
   return (
     <JawaKlasikTemplate
