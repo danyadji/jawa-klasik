@@ -10,7 +10,6 @@ import flowerLeft from '../assets/illustrations/bunga-kiri.webp';
 import flowerRight from '../assets/illustrations/bunga-kanan.webp';
 import igIcon from '../assets/illustrations/instagram-button.webp';
 import bgOrnamen2 from '../assets/illustrations/bg-ornamen-2.webp';
-import bgSuratPembuka from '../assets/backgrounds/bg-surat-pambuka.webp';
 
 function formatQuote(text) {
   if (!text) return { body: '', source: '' };
@@ -22,7 +21,7 @@ function formatQuote(text) {
     .replace(/\r/g, '\n')
     .trim();
 
-  // Pisahkan sitasi jika ada di akhir (misal QS. Ar-Rum: 21)
+
   let body = cleaned;
   let source = '';
 
@@ -46,7 +45,7 @@ function formatQuote(text) {
     }
   }
 
-  // Bersihkan newline berlebih agar teks mengalir seimbang di segala ukuran layar HP
+
   body = body.replace(/\s+/g, ' ').trim();
 
   return {
@@ -80,15 +79,8 @@ export default function CoupleProfile({ groom, bride, quote }) {
             />
 
             <motion.div {...fadeInUp} className="text-center mt-6 mb-4 min-[400px]:mb-6 relative w-full max-w-[460px] mx-auto px-2 min-[375px]:px-4">
-              {/* Background surat pembuka */}
               <div
-                className="absolute inset-0 -inset-x-2 -inset-y-3 min-[400px]:-inset-x-4 min-[400px]:-inset-y-5 z-0 bg-no-repeat bg-center bg-[size:100%_100%] pointer-events-none"
-                style={{ backgroundImage: `url(${bgSuratPembuka})` }}
-                aria-hidden="true"
-              />
-
-              <div
-                className="relative z-10 font-isi text-[#4d3a30] text-[12.5px] min-[360px]:text-[13.5px] min-[400px]:text-[15px] leading-[1.8] py-4 min-[400px]:py-5 px-3 min-[375px]:px-4 min-[400px]:px-6 mb-4 min-[400px]:mb-6"
+                className="font-isi text-[#4d3a30] text-[12.5px] min-[360px]:text-[13.5px] min-[400px]:text-[15px] leading-[1.8] mb-4 min-[400px]:mb-6 px-1"
                 style={{ fontFamily: 'Futura Bk BT, sans-serif', textWrap: 'balance' }}
               >
                 {quote ? (
@@ -168,7 +160,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
                 </div>
 
                 <div className="mt-2 min-[400px]:mt-3 text-center px-2 min-[400px]:px-4">
-                  <h3 className="text-5xl min-[375px]:text-6xl min-[400px]:text-7xl text-[#6b492b] font-nama mt-2 mb-1" style={{ fontFamily: 'Great Vibes, cursive' }}>
+                  <h3 className="text-5xl min-[375px]:text-4xl min-[400px]:text-7xl text-[#6b492b] font-nama mt-2 mb-1" style={{ fontFamily: 'Great Vibes, cursive' }}>
                     {bride?.nickname || 'Fifi'}
                   </h3>
                   <h4 className="font-judul font-bold not-italic tracking-widest text-[16px] min-[375px]:text-[18px] min-[400px]:text-[20px] text-[#4d3a30] uppercase mb-2" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
@@ -206,7 +198,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
                 </div>
 
                 <div className="mt-2 min-[400px]:mt-3 text-center px-2 min-[400px]:px-4">
-                  <h3 className="text-5xl min-[375px]:text-6xl min-[400px]:text-7xl text-[#6b492b] font-nama mt-2 mb-1" style={{ fontFamily: 'Great Vibes, cursive' }}>
+                  <h3 className="text-5xl min-[375px]:text-4xl min-[400px]:text-7xl text-[#6b492b] font-nama mt-2 mb-1" style={{ fontFamily: 'Great Vibes, cursive' }}>
                     {groom?.nickname || 'Danu'}
                   </h3>
                   <h4 className="font-judul font-bold not-italic tracking-widest text-[16px] min-[375px]:text-[18px] min-[400px]:text-[20px] text-[#4d3a30] uppercase mb-2" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
