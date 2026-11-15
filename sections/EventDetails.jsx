@@ -100,7 +100,7 @@ export default function EventDetails({ events }) {
                 transition={{ delay: idx * 0.2 }}
                 className="flex flex-col items-center text-center w-full"
               >
-                <h3 className="text-4xl min-[400px]:text-5xl text-[#7c8363] mb-3 italic" style={{ fontFamily: 'Great Vibes, cursive' }}>
+                <h3 className="text-4xl min-[400px]:text-5xl text-[#7c8363] mb-3" style={{ fontFamily: 'Great Vibes, cursive' }}>
                   {event.title}
                 </h3>
 

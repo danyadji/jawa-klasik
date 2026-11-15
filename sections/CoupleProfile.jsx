@@ -133,14 +133,14 @@ export default function CoupleProfile({ groom, bride, quote }) {
                   className="absolute right-[-20px] min-[400px]:right-[-24px] top-[-65px] w-36 min-[400px]:w-40 h-auto rotate-[15deg]"
                 />
 
-                <div className="text-center relative mt-8 min-[400px]:mt-10 mb-1 z-20">
+                <div className="text-center relative mt-14 min-[400px]:mt-10 mb-1 z-20">
                   <h2 className="font-nama text-3xl min-[375px]:text-4xl min-[400px]:text-5xl text-[#4d3a30] pt-1" style={{ fontFamily: 'Photograph Signature, cursive' }}>
                     Assalamu’alaikum
                   </h2>
                 </div>
               </div>
 
-              <motion.p {...fadeInUp} className="w-full max-w-[440px] mx-auto font-isi not-italic text-[#4d3a30] text-[12px] min-[375px]:text-[13px] min-[400px]:text-[14.5px] text-center leading-[1.75] mb-5 min-[400px]:mb-6 px-4 min-[375px]:px-5 min-[400px]:px-7" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
+              <motion.p {...fadeInUp} className="w-full max-w-[440px] mx-auto font-isi not-italic text-[#4d3a30] text-[12px] min-[375px]:text-[13px] min-[400px]:text-[14.5px] text-center leading-[1.75] mb-2 min-[400px]:mb-6 px-4 min-[375px]:px-5 min-[400px]:px-7" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
                 Dengan memohon Rahmat dan Ridho Allah SWT<br />
                 Kami bermaksud mengundang Bapak/Ibu/Saudara/i<br />
                 untuk menghadiri acara pernikahan kami
