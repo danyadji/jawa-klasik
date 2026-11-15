@@ -155,7 +155,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
                   decoding="async"
                 />
 
-                <div className="w-[82%] max-w-[205px] min-[400px]:max-w-[225px] aspect-[4/5] rounded-[100%] mt-3 overflow-hidden border-[3.5px] border-white shadow-xl relative z-10 bg-white">
+                <div className="w-[90%] max-w-[225px] min-[375px]:max-w-[235px] min-[400px]:max-w-[255px] aspect-[4/5] rounded-[100%] mt-3 overflow-hidden border-[3.5px] border-white shadow-xl relative z-10 bg-white">
                   <img src={bride?.photo || wanitaPhoto} alt="Bride" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
 
@@ -193,7 +193,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
                   decoding="async"
                 />
 
-                <div className="w-[82%] max-w-[205px] min-[400px]:max-w-[225px] aspect-[4/5] rounded-[100%] mt-3 overflow-hidden border-[3.5px] border-white shadow-xl relative z-10 bg-white">
+                <div className="w-[90%] max-w-[225px] min-[375px]:max-w-[235px] min-[400px]:max-w-[255px] aspect-[4/5] rounded-[100%] mt-3 overflow-hidden border-[3.5px] border-white shadow-xl relative z-10 bg-white">
                   <img src={groom?.photo || priaPhoto} alt="Groom" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
 
