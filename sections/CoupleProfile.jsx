@@ -117,7 +117,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
               style={{ backgroundImage: `url(${bgOrnamen2})` }}
             ></div>
             <div className="relative z-10 flex flex-col items-center w-full px-2 pt-10 min-[400px]:pt-14">
-              <div className="relative w-full flex justify-center mb-2">
+              <div className="relative w-full flex justify-center mb-0.5">
                 <motion.img
                   initial={{ x: -50, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
@@ -133,7 +133,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
                   className="absolute right-[-20px] min-[400px]:right-[-24px] top-[-65px] w-36 min-[400px]:w-40 h-auto rotate-[15deg]"
                 />
 
-                <div className="text-center relative mt-6 mb-4 min-[400px]:mb-6 z-20">
+                <div className="text-center relative mt-8 min-[400px]:mt-10 mb-1 z-20">
                   <h2 className="font-nama text-3xl min-[375px]:text-4xl min-[400px]:text-5xl text-[#4d3a30] pt-1" style={{ fontFamily: 'Photograph Signature, cursive' }}>
                     Assalamu’alaikum
                   </h2>
@@ -163,7 +163,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
                   <h3 className="text-5xl min-[375px]:text-4xl min-[400px]:text-7xl text-[#6b492b] font-nama mt-2 mb-1" style={{ fontFamily: 'Great Vibes, cursive' }}>
                     {bride?.nickname || 'Fifi'}
                   </h3>
-                  <h4 className="font-judul font-bold not-italic tracking-widest text-[16px] min-[375px]:text-[18px] min-[400px]:text-[20px] text-[#4d3a30] uppercase mb-2" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
+                  <h4 className="font-judul font-bold not-italic tracking-normal text-[16px] min-[375px]:text-[18px] min-[400px]:text-[20px] text-[#4d3a30] uppercase mb-2" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
                     {bride?.fullName || 'MAGFIROH NUR PUSPITA'}
                   </h4>
                   <p className="font-isi not-italic text-[14px] min-[375px]:text-[15px] min-[400px]:text-[16px] text-[#4d3a30] mb-3 px-2 leading-relaxed" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
@@ -178,7 +178,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
               <motion.div
                 initial={{ scale: 0.5, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-                className="text-5xl min-[375px]:text-6xl min-[400px]:text-7xl text-[#6b492b] font-judul my-2 min-[400px]:my-3 opacity-70 px-8 text-center"
+                className="text-5xl min-[375px]:text-5xl min-[400px]:text-7xl text-[#6b492b] font-judul my-2 min-[400px]:my-3 opacity-70 px-8 text-center"
                 style={{ fontFamily: 'Great Vibes, cursive' }}
               >
                 &
@@ -201,7 +201,7 @@ export default function CoupleProfile({ groom, bride, quote }) {
                   <h3 className="text-5xl min-[375px]:text-4xl min-[400px]:text-7xl text-[#6b492b] font-nama mt-2 mb-1" style={{ fontFamily: 'Great Vibes, cursive' }}>
                     {groom?.nickname || 'Danu'}
                   </h3>
-                  <h4 className="font-judul font-bold not-italic tracking-widest text-[16px] min-[375px]:text-[18px] min-[400px]:text-[20px] text-[#4d3a30] uppercase mb-2" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
+                  <h4 className="font-judul font-bold not-italic tracking-normal text-[16px] min-[375px]:text-[18px] min-[400px]:text-[20px] text-[#4d3a30] uppercase mb-2" style={{ fontFamily: 'Chyntia Oesman Sans, sans-serif', fontStyle: 'normal' }}>
                     {groom?.fullName || 'MUHAMAD ALDANU RAHMANSYAH'}
                   </h4>
                   <p className="font-isi not-italic text-[14px] min-[375px]:text-[15px] min-[400px]:text-[16px] text-[#4d3a30] mb-3 px-2 leading-relaxed" style={{ fontFamily: 'Futura Bk BT, sans-serif', fontStyle: 'normal' }}>
